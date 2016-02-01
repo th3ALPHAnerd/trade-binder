@@ -3,14 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/halbrooksdg/NetBeansProjects/tradeBinder/public/kentExampleFiles/TodoFactory.js</file>
-            <file>file:/home/halbrooksdg/NetBeansProjects/tradeBinder/public/app/tradeBinders/tradeBindersModule.js</file>
-            <file>file:/home/halbrooksdg/NetBeansProjects/tradeBinder/public/kentExampleFiles/TodoController.js</file>
-            <file>file:/home/halbrooksdg/NetBeansProjects/tradeBinder/public/app.js</file>
-            <file>file:/home/halbrooksdg/NetBeansProjects/tradeBinder/public/app/tradeBinders/tradebindersController.js</file>
-            <file>file:/home/halbrooksdg/NetBeansProjects/tradeBinder/public/index.html</file>
-            <file>file:/home/halbrooksdg/NetBeansProjects/tradeBinder/public/kentExampleFiles/app.js</file>
-            <file>file:/home/halbrooksdg/NetBeansProjects/tradeBinder/public/app/tradeBinders/tradeBinders.html</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/account/register/registerModule.js</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/tradeBinders/tradebindersController.js</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/home/homeModule.js</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/account/signIn/signInModule.js</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/account/signIn/signIn.html</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/cardShops/cardShopsModule.js</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/home/home.html</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/account/register/register.html</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/cardShops/cardShops.html</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/tradeBinders/tradeBindersModule.js</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app/tradeBinders/tradebindersService.js</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/app.js</file>
+            <file>file:/home/pettymt/NetBeansProjects/tradeBinder/public/index.html</file>
         </group>
     </open-files>
 </project-private>

@@ -1,6 +1,7 @@
 (function () {
     'use strict';
-    angular.module('tradeBinder.tradeBinders', [])
+    
+    angular.module('tradeBinders.TradeBindersController', [])
             .controller('TradeBindersController', TradeBindersController);
     
     function TradeBindersController() {
