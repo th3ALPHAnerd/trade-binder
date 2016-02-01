@@ -1,10 +1,13 @@
 (function () {
     'use strict';
-    angular.module('tradeBinder', ['ngRoute'])
-            .config(['$routeProvider', function ($routeProvider) {
-                    $routeProvider.when('/tradeBinders', {
+    angular.module('tradeBinders', ['ngRoute', 'tradeBinders.TradeBindersController'])
+            .config(['$routeProvider',function ($routeProvider) {
+                    $routeProvider
+                    .when('/tradeBinders', {
                         templateUrl: 'app/tradeBinders/tradeBinders.html',
-                        controller: 'TradeBindersController'
+                        controller: 'TradeBindersController',
+                        controllerAs: 'TradeBinder',
+                        resolve:{}
                     });
                 }]);
 })();
