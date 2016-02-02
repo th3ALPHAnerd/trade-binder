@@ -5,7 +5,7 @@
             .config(['$routeProvider',function ($routeProvider) {
                     $routeProvider
                     .when('/register', {
-                        templateUrl: 'app/account/register.html',
+                        templateUrl: 'app/account/register/register.html',
                         resolve:[]
                     });
                 }]);
