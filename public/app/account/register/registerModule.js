@@ -6,7 +6,7 @@
                     $routeProvider
                     .when('/register', {
                         templateUrl: 'app/account/register.html',
-                        resolve:{}
+                        resolve:[]
                     });
                 }]);
 })();

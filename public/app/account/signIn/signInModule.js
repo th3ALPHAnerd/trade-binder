@@ -6,7 +6,7 @@
                     $routeProvider
                     .when('/signIn', {
                         templateUrl: 'app/account/signIn.html',
-                        resolve:{}
+                        resolve:[]
                     });
                 }]);
 })();

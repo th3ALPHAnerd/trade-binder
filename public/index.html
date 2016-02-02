@@ -4,44 +4,42 @@
         <title>Madison County TCG Trade Binder</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="assets/libs/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        
         <script src="assets/libs/angular.min.js" type="text/javascript"></script>
         <script src="assets/libs/angular-route.min.js" type="text/javascript"></script>
         <script src="app.js" type="text/javascript"></script>
+        <link href="assets/libs/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!-- TradeBinder -->
         <script src="app/tradeBinders/tradeBindersModule.js" type="text/javascript"></script>
         <script src="app/tradeBinders/tradebindersController.js" type="text/javascript"></script>
         <script src="app/tradeBinders/tradebindersService.js" type="text/javascript"></script>
-        <!-- home -->
-        <script src="app/home/homeModule.js" type="text/javascript"></script>
         <!-- signIn -->
         <script src="app/account/signIn/signInModule.js" type="text/javascript"></script>
-
         <!-- register -->
         <script src="app/account/register/registerModule.js" type="text/javascript"></script>
         <!-- cardShops -->
         <script src="app/cardShops/cardShopsModule.js" type="text/javascript"></script>
-
         <!-- Vendor Font Awesome-->
         <link href="assets/libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
     </head>
     <body ng-app="app">
         <div style="background-color: #E6E6E6;">
-            <nav class="navbar navbar-default" style="background-color: black;">
-                <div class="container">
+            <nav class="navbar navbar-inverse" style="background-color: black;">
+                <div class="container-fluid">
                     <div class="navbar-header">
                         <!--Navbar header, put stuff here -->
+                        <a class="navbar-brand" href="#"> Trade Binder</a>
                     </div>
                     <ul class="nav navbar-nav navbar-left">
-                        <li><a href="#/home"> Home</a></li>
+                        <li><a class="active" href="#"> Home</a></li>
                         <li><a href="#/tradeBinders"> Trade Binders</a></li>
                         <li><a href="#/cardShops"> Find a Card Shop</a></li>
                         <li class="dropdown">
-                            <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                 Account<span class="caret"></span>
                             </a>
-                            <ul class="dropdown-menu" role="menu">
+                            <ul class="dropdown-menu">
                                 <li><a href="#/signIn">Sign In</a></li>
                                 <li><a href="#/register">Register</a></li>
                             </ul>

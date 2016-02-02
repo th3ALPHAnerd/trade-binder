@@ -6,7 +6,7 @@
                     $routeProvider
                     .when('/cardShops', {
                         templateUrl: 'app/cardShops/cardShops.html',
-                        resolve:{}
+                        resolve:[]
                     });
                 }]);
 })();
