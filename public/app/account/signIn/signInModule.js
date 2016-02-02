@@ -5,7 +5,7 @@
             .config(['$routeProvider',function ($routeProvider) {
                     $routeProvider
                     .when('/signIn', {
-                        templateUrl: 'app/account/signIn.html',
+                        templateUrl: 'app/account/signIn/signIn.html',
                         resolve:[]
                     });
                 }]);
