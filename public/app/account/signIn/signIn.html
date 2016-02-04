@@ -1,1 +1,19 @@
 <div>Sign In</div>
+
+<div class="container">
+    <form class="form-signin" name="loginFrm">
+        <h2 align="center" class="form-signin-heading">Please Sign In</h2>
+
+        <label for="login.email" class="sr-only">Email address</label>
+        <input ng-model="signin.email" type="text" id="email" class="form-control" placeholder="Email address" required autofocus/>
+        
+        <h4></h4>
+        <label for="login.password" class="sr-only">Password</label>
+        <input ng-model="signin.password" type="password" id="password" class="form-control" placeholder="Password" required/>
+        <h4></h4>
+        <button class="btn btn-lg btn-primary btn-block" type="ng-submit" ng-disabled="loginFrm.$invalid" ng-click="signin.signInSubmit()">Sign in</button>
+        <h4></h4>
+    </form>
+
+    <a href="#/register"><button class="btn btn-lg btn-default btn-block">Don't Have an account</button></a>
+</div>
