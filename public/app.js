@@ -5,7 +5,17 @@
         'tradeBinders',
         'account.signIn',
         'account.register',
-        'cardShops'
-    ]);
-    
+        'cardShops',
+        'account',
+        'angular-jwt'
+    ])
+            .config(function myConfig(jwtInterceptorProvider, $httpProvider) {
+                jwtInterceptorProvider.tokenGetter = function (store) {
+                    return store.get('jwt');
+                };
+
+                $httpProvider.interceptors.push('jwtInterceptor');
+            });
+
+
 })();
