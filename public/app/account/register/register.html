@@ -1,1 +1,26 @@
 <div>Register</div>
+
+<div class="container">
+    <form name="registrationFrm">
+        <h2 align="center">Please Register</h2>
+
+        <h3>User Name</h3>
+        <label for="register.userName" class="sr-only">User Name</label>
+        <input ng-model="register.userName" type="text" id="userName" class="form-control" placeholder="User Name" required/>
+
+        <h3>Email</h3>
+        <label for="register.email" class="sr-only">Email address</label>
+        <input ng-model="register.email" type="email" id="email" class="form-control" placeholder="Email address" required/>
+
+        <h3>Zip Code</h3>
+        <label for="register.zipCode" class="sr-only">Zip Code</label>
+        <input ng-model="register.zipCode" type="text" id="zipCode" pattern="^[0-9]{5}(?:-[0-9]{4})?$" class="form-control" placeholder="Zip Code" required/>
+
+        <h3>Password</h3>
+        <label for="register.password" class="sr-only">Password</label>
+        <input ng-model="register.password" type="password" id="password" class="form-control" placeholder="Password" required/>
+        <h3></h3>
+
+        <button class="btn btn-lg btn-primary btn-block" type="ng-submit" ng-disabled="registrationFrm.$invalid" ng-click="registerSubmit()">Register</button>
+    </form>
+</div>

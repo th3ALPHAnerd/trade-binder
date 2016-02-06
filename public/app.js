@@ -7,4 +7,5 @@
         'account.register',
         'cardShops'
     ]);
+    
 })();
