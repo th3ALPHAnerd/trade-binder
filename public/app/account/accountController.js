@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('account.accountController', [])
+    angular.module('account.accountController', ['angular-storage', 'angular-jwt'])
             .controller('accountController', accountController);
 
     function accountController($scope, $http, store, jwtHelper) {

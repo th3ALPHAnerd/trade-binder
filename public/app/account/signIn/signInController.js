@@ -4,7 +4,7 @@
     angular.module('account.signIn.signInController', ['ui.router', 'angular-storage'])
             .controller('signInController', signInController);
 
-    function signInController($http, store) {
+    function signInController($http, store, $state) {
         var vm = this;
 
         vm.signInSubmit = function () {
@@ -17,15 +17,15 @@
                 data: user
             }).then(function (response) {
                 store.set('jwt', response.data.id_token);
-            }, function (response) {
-                alert(response.data);
+                $state.go('account');
+            }, function (error) {
+                alert(error.data);
             });
 
         };
 
 
-    }
-    ;
+    };
 
 })();
 

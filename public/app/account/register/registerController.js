@@ -8,7 +8,7 @@
     function RegisterCtrl() {
         var vm = this;
 
-        vm.registerSubmit = function ($http, store) {
+        vm.registerSubmit = function ($http, store, $state) {
             //need to figure out the api endpoint
             var userUrl = 'http://localhost:3001/users';
             var user = {userName: vm.userName, email: vm.email, password: vm.password, zipCode: vm.zipCode };
@@ -18,9 +18,9 @@
                 data: user
             }).then(function (response) {
                 store.set('jwt', response.data.id_token);
-                
-            }, function (response) {
-                alert(response.data);
+                $state.go('account');
+            }, function (error) {
+                alert(error.data);
             });
         };
     }
