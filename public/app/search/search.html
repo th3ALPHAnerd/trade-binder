@@ -1,0 +1,30 @@
+<div class="container">
+
+    <form class="form-signin" name="searchFrm">
+
+
+        <label for="search.search" class="sr-only">Card Name</label>
+        <input ng-model="search.search" type="text" id="search" class="form-control" placeholder="Card Name" required autofocus/>
+
+        <button class="btn btn-lg btn-primary btn-block" type="ng-submit" ng-disabled="searchFrm.$invalid" ng-click="search.searchSubmit(search.search)">Search</button>
+
+    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <b>Card Name</b>
+            </div>
+            <div class="col-md-8">
+                <b>Card Image</b>
+            </div>
+        </div>
+        <div class="row" ng-repeat="card in search.cards track by $index">
+            <div class="col-md-4">{{card.name}}</div>
+
+            <div class="col-md-8">
+                <a ng-repeat="edition in card.editions track by $index" ng-href="{{edition.store_url}}"><img   class="img-responsive" ng-src="{{edition.image_url}}" ng-show="{{edition.multiverse_id}} != 0"/></a>
+            </div>
+
+        </div>
+    </div>
+</div>
