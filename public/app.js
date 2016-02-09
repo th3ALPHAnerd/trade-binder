@@ -5,7 +5,8 @@
         'tradeBinders',
         'account.signIn',
         'account.register',
-        'cardShops'
+        'cardShops',
+        'search'
     ]);
     
 })();
