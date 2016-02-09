@@ -49,7 +49,7 @@ For our mongodb.js example:
 start the mongodb server
 type: 'mongo'
 > use tradeBinder
-> tradeBinder.user.insert({user: "leeroy", jwt: "asaalsjkdghfkajsgdu8734jhg54"})
+> tradeBinder.user.save({user: "leeroy", jwt: "asaalsjkdghfkajsgdu8734jhg54"})
 'ctrl + c' to exit
 
 node mongodb.js

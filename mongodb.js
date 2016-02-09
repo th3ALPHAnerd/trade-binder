@@ -16,7 +16,7 @@ MongoClient.connect(url, function (err, db) {
         console.log('Connection established to', url);
 
         // Get the documents collection
-        var collection = db.collection('user');
+        var collection = db.collection('tradeBinder.user');
 
         // Insert some users
         collection.find({user: 'leeroy'}).toArray(function (err, result) {
