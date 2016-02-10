@@ -19,7 +19,7 @@
                                 num: Quantity(line)
                             };
 
-                            SearchFactory.getCards(CardName(line))
+                            SearchFactory.getCards(card.name)
                                     .success(function (dataResponse) {
                                         dataResponse.forEach(function (foundCard) {
                                             if (foundCard.name.toUpperCase() === card.name.toUpperCase())

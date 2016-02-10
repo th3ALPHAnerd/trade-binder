@@ -15,7 +15,7 @@
             </div>
 
             <div class="col-md-2">
-                # Owned
+                # Have
             </div>
             <div class="col-md-3">
             </div>
@@ -23,14 +23,14 @@
         </div>
         <div class="row" ng-repeat="card in tradeBinder.cards track by $index">
             <div class="col-md-3">{{card.name}}</div>
-
-
             <div class="col-md-2">
-                <button ng-click="tradeBinder.lowerQuantity(card)">-</button>
                 {{card.ownedQuantity}}
-                <button ng-click="tradeBinder.upQuantity(card)">+</button>
+                <div class="btn-group-vertical">
+                    <button type="button" ng-click="tradeBinder.upQuantity(card)" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
+                    <button type="button" ng-click="tradeBinder.lowerQuantity(card)" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
+                </div>
             </div>
-            <div><button class="btn btn-danger" ng-click="tradeBinder.removeCard(card)">Delete</button></div>
+            <div><button class="btn" ng-click="tradeBinder.removeCard(card)"><i class="fa fa-trash-o fa-lg"></i></button></div>
         </div>
     </div>
 </div>
