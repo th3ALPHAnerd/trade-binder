@@ -22,8 +22,8 @@
         <script src="app.js" type="text/javascript"></script>
         <!-- TradeBinder -->
         <script src="app/tradeBinders/tradeBindersModule.js" type="text/javascript"></script>
-        <script src="app/tradeBinders/tradebindersController.js" type="text/javascript"></script>
-        <script src="app/tradeBinders/tradebindersService.js" type="text/javascript"></script>
+        <script src="app/tradeBinders/tradeBindersController.js" type="text/javascript"></script>
+        <script src="app/tradeBinders/tradeBindersFactory.js" type="text/javascript"></script>
         <!-- signIn -->
         <script src="app/account/signIn/signInModule.js" type="text/javascript"></script>
         <script src="app/account/signIn/signInController.js" type="text/javascript"></script>
@@ -35,6 +35,10 @@
         <script src="app/account/register/registerController.js" type="text/javascript"></script>
         <!-- cardShops -->
         <script src="app/cardShops/cardShopsModule.js" type="text/javascript"></script>
+        <!-- search-->
+        <script src="app/search/searchModule.js" type="text/javascript"></script>
+        <script src="app/search/searchController.js" type="text/javascript"></script>
+        <script src="app/search/searchFactory.js" type="text/javascript"></script>
         <!-- Vendor Font Awesome-->
         <link href="assets/libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
 
@@ -49,9 +53,15 @@
                     </div>
                     <ul class="nav navbar-nav navbar-left">
                         <li><a class="active" href="#"> Home</a></li>
+<<<<<<< HEAD
+                        <li><a href="#/search">Search</a></li>
+                        <li><a href="#/tradeBinders"> Trade Binders</a></li>
+                        <li><a href="#/cardShops"> Find a Card Shop</a></li>
+=======
                         <li><a ui-sref="tradeBinders"> Trade Binders</a></li>
                         <li><a ui-sref="cardShops"> Find a Card Shop</a></li>
                         <li><a ui-sref="account"> Test</a></li>
+>>>>>>> testing/auth0
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" href="">
                                 Account<span class="caret"></span>

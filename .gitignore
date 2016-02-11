@@ -1,3 +1,7 @@
 /nbproject
 /node_modules
+<<<<<<< HEAD
 .directory
+=======
+.directory
+>>>>>>> testing/auth0
