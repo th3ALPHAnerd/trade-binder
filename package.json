@@ -1,8 +1,17 @@
 {
-    "name": "tradeBinder",
-    "version": "1.0.0",
-    "keywords": ["util", "functional", "server", "client", "browser"],
-    "author": "halbrooksdg",
-    "contributors": [],
-    "dependencies": {}
+  "name": "tradeBinder",
+  "version": "1.0.0",
+  "keywords": [
+    "util",
+    "functional",
+    "server",
+    "client",
+    "browser"
+  ],
+  "author": "halbrooksdg",
+  "contributors": [],
+  "dependencies": {
+    "express": "^4.13.4",
+    "mongodb": "^2.1.6"
+  }
 }
