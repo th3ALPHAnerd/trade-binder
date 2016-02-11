@@ -23,8 +23,10 @@
         </div>
         <div class="row" ng-repeat="card in tradeBinder.cards track by $index">
             <div class="col-lg-offset-4 col-md-offset-4">
+
                 <div class="col-lg-4 col-md-4">
-                    {{card.name}}
+                    <div><span trade-binders-directive name="{{card.name}}" card-image="{{card.image}}"></span></div>
+                    
                 </div>
                 <div class="col-lg-4 col-md-4">
                     {{card.ownedQuantity}}

@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     
-    angular.module('tradeBinders', ['ngRoute', 'TradeBinders.TradeBindersController'])
+    angular.module('tradeBinders', ['ngRoute', 'TradeBinders.TradeBindersController','TradeBinders.TradeBindersDirective'])
             .config(['$routeProvider',function ($routeProvider) {
                     $routeProvider
                     .when('/tradeBinders', {

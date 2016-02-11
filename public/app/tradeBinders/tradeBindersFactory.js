@@ -23,10 +23,19 @@
                                     .success(function (dataResponse) {
                                         dataResponse.forEach(function (foundCard) {
                                             if (foundCard.name.toUpperCase() === card.name.toUpperCase())
-                                                Collection.push({
-                                                    name: foundCard.name,
-                                                    ownedQuantity: card.num
-                                                });
+                                                var cardImage;
+                                            for (var i = 0; i < foundCard.editions.length; i++) {
+                                                if (foundCard.editions[i].multiverse_id !== 0) {
+                                                    cardImage = foundCard.editions[i].image_url;
+                                                    break;
+                                                }
+                                            }
+//                                            
+                                            Collection.push({
+                                                name: foundCard.name,
+                                                ownedQuantity: card.num,
+                                                image: cardImage
+                                            });
                                         });
                                     });
                         });
@@ -37,7 +46,7 @@
             },
             upCardQuantity: function (name) {
                 var indexOf = Collection.indexOf(name);
-                console.log("up " + name);
+                //console.log("up " + name);
                 Collection[indexOf].ownedQuantity += 1;
             },
             lowerCardQuantity: function (name) {
