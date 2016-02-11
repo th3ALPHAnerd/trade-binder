@@ -1,30 +1,32 @@
 <div class="container">
-
-    <form class="form-signin" name="searchFrm">
-
-
-        <label for="search.search" class="sr-only">Card Name</label>
-        <input ng-model="search.search" type="text" id="search" class="form-control" placeholder="Card Name" required autofocus/>
-
-        <button class="btn btn-lg btn-primary btn-block" type="ng-submit" ng-disabled="searchFrm.$invalid" ng-click="search.searchSubmit(search.search)">Search</button>
-
+    <form class="form-signin" name="searchFrm" role="form">
+        <div class="row">
+            <div class="form-group col-lg-4 col-md-4 col-lg-offset-4 col-md-offset-4">
+                <label for="search.search" class="sr-only">Card Name</label>
+                <input ng-model="search.search" type="text" id="search.search" class="form-control" placeholder="Card Name" required autofocus/>
+                <button class="btn btn-lg btn-primary btn-block" type="ng-submit" ng-disabled="searchFrm.$invalid" ng-click="search.searchSubmit(search.search)">Search</button>
+            </div>
+        </div>
     </form>
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
-                <b>Card Name</b>
-            </div>
-            <div class="col-md-8">
-                <b>Card Image</b>
+            <div class="col-lg-offset-2 col-md-offset-2">
+                <div class="col-lg-4 col-md-4">
+                    <strong>Card Name</strong>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <strong>Card Image</strong>
+                </div>
             </div>
         </div>
         <div class="row" ng-repeat="card in search.cards track by $index">
-            <div class="col-md-4">{{card.name}}</div>
+            <div class="col-lg-offset-2 col-md-offset-2">
+                <div class="col-lg-4 col-md-4">{{card.name}}</div>
 
-            <div class="col-md-8">
-                <a ng-repeat="edition in card.editions track by $index" ng-href="{{edition.store_url}}"><img   class="img-responsive" ng-src="{{edition.image_url}}" ng-show="{{edition.multiverse_id}} != 0"/></a>
+                <div class="col-lg-4 col-md-4">
+                    <a ng-repeat="edition in card.editions track by $index" ng-href="{{edition.store_url}}"><img   class="img-responsive" ng-src="{{edition.image_url}}" ng-show="{{edition.multiverse_id}} != 0"/></a>
+                </div>
             </div>
-
         </div>
     </div>
 </div>
