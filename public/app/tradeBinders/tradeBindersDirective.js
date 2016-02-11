@@ -11,7 +11,7 @@
             link: function (scope, el, attrs) {
                 scope.name = attrs.name;
                 $(el).popover({
-                    trigger: 'click',
+                    trigger: 'hover',
                     html: true,
                     content: '<img src='+attrs.cardImage +'>',
                     placement: "bottom"

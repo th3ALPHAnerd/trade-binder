@@ -19,39 +19,47 @@
                                 num: Quantity(line)
                             };
 
-                            SearchFactory.getCards(card.name)
+                            SearchFactory.getCards(CardName(line))
                                     .success(function (dataResponse) {
-                                        dataResponse.forEach(function (foundCard) {
-                                            if (foundCard.name.toUpperCase() === card.name.toUpperCase())
-                                                var cardImage;
-                                            for (var i = 0; i < foundCard.editions.length; i++) {
-                                                if (foundCard.editions[i].multiverse_id !== 0) {
-                                                    cardImage = foundCard.editions[i].image_url;
-                                                    break;
-                                                }
-                                            }
-//                                            
-                                            Collection.push({
-                                                name: foundCard.name,
-                                                ownedQuantity: card.num,
-                                                image: cardImage
-                                            });
-                                        });
+                                        dataResponse
+                                                .filter(function (foundCard) {
+                                                    return foundCard.name.toUpperCase() === card.name.toUpperCase();
+                                                })
+                                                .forEach(function (foundCard) {
+
+                                                    var cardImage;
+                                                    if (foundCard.editions[0].multiverse_id !== 0) {
+                                                        cardImage = foundCard.editions[0].image_url;
+                                                    } else {
+                                                        cardImage = foundCard.editions[1].image_url;
+                                                    }
+                                                    Collection.push({
+                                                        name: foundCard.name,
+                                                        ownedQuantity: card.num,
+                                                        forTrade: 0,
+                                                        want: 0,
+                                                        image: cardImage
+                                                    });
+                                                })
                                     });
                         });
             },
             removeCard: function (name) {
-                var indexOf = Collection.indexOf(name);
-                Collection.splice(indexOf, 1);
+                console.log(name);
+                var index = Collection.indexOf(name);
+                console.log(index);
+                Collection.splice(index, 1);
+                console.log(Collection);
             },
             upCardQuantity: function (name) {
                 var indexOf = Collection.indexOf(name);
-                //console.log("up " + name);
                 Collection[indexOf].ownedQuantity += 1;
             },
             lowerCardQuantity: function (name) {
                 var indexOf = Collection.indexOf(name);
-                Collection[indexOf].ownedQuantity -= 1;
+                if (Collection[indexOf].ownedQuantity >= 1) {
+                    Collection[indexOf].ownedQuantity -= 1;
+                }
             }
         };
     }
@@ -71,7 +79,7 @@
         var indexOf = line.indexOf(" ");
         var possibleNum = line.substring(0, indexOf);
         if (!isNaN(possibleNum)) {
-            return line.substring(indexOf + 1);
+            return line.substring(indexOf + 1).replace(/\s+/g, ' ').trim();
         } else {
             return line;
         }

@@ -13,6 +13,7 @@
             if (cards.length > 0) {
                 TradeBindersFactory.addCards(cards);
                 vm.cards = TradeBindersFactory.getCards();
+                
                 vm.addList = [];
             }
         };
