@@ -48,8 +48,8 @@ mongo
 For our mongodb.js example:
 start the mongodb server
 type: 'mongo'
-> use tradeBinder
-> tradeBinder.user.save({user: "leeroy", jwt: "asaalsjkdghfkajsgdu8734jhg54"})
+> use users
+> db.users.save({user: "leeroy", jwt: "asaalsjkdghfkajsgdu8734jhg54"})
 'ctrl + c' to exit
 
 node mongodb.js
