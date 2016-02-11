@@ -5,7 +5,7 @@ var mongodb = require('mongodb');
 var MongoClient = mongodb.MongoClient;
 
 // Connection URL. This is where the server is running.
-var url = 'mongodb://localhost:27017/tradeBinder';
+var url = 'mongodb://localhost:27017/users';
 
 // Use connect method to connect to the Server
 MongoClient.connect(url, function (err, db) {
@@ -16,7 +16,7 @@ MongoClient.connect(url, function (err, db) {
         console.log('Connection established to', url);
 
         // Get the documents collection
-        var collection = db.collection('user');
+        var collection = db.collection('users');
 
         // Insert some users
         collection.find({user: 'leeroy'}).toArray(function (err, result) {
