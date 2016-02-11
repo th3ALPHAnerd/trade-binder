@@ -4,7 +4,7 @@
     angular.module('app', [
         'tradeBinders',
         'account.signIn',
-        'account.register',
+        'Account.Register',
         'cardShops',
         'search'
     ]);

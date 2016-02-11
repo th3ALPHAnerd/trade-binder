@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('account.signIn.signInController', ['ui.router', 'angular-storage'])
+    angular.module('account.signIn.signInController', ['ngRoute', 'angular-storage'])
             .controller('signInController', signInController);
 
     function signInController($http, store, $state) {
