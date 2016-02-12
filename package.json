@@ -10,8 +10,20 @@
   ],
   "author": "halbrooksdg",
   "contributors": [],
+  "scripts": {
+    "setup": "./setup.js"
+  },
   "dependencies": {
+    "async": "^1.x.x",
+    "bcrypt": "^0.8.x",
+    "boom": "^2.x.x",
+    "confidence": "^1.x.x",
     "express": "^4.13.4",
-    "mongodb": "^2.1.7"
+    "glue": "^2.x.x",
+    "handlebars": "^3.x.x",
+    "hapi": "^8.x.x",
+    "hapi-mongo-models": "^2.x.x",
+    "joi": "^6.x.x",
+    "mongodb": "^2.x.x"
   }
 }
