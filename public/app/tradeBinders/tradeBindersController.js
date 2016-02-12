@@ -13,7 +13,7 @@
             if (cards.length > 0) {
                 TradeBindersFactory.addCards(cards);
                 vm.cards = TradeBindersFactory.getCards();
-                
+
                 vm.addList = [];
             }
         };
@@ -22,12 +22,30 @@
             TradeBindersFactory.removeCard(card);
         };
 
-        vm.upQuantity = function (card) {
-            TradeBindersFactory.upCardQuantity(card);
+        vm.upOwnedQuantity = function (card) {
+            TradeBindersFactory.upOwnedCardQuantity(card);
         };
 
-        vm.lowerQuantity = function (card) {
-            TradeBindersFactory.lowerCardQuantity(card);
+        vm.lowerOwnedQuantity = function (card) {
+            TradeBindersFactory.lowerOwnedCardQuantity(card);
+        };
+
+        vm.upWantQuantity = function (card) {
+            TradeBindersFactory.upWantCardQuantity(card);
+        };
+
+        vm.lowerWantQuantity = function (card) {
+            TradeBindersFactory.lowerWantCardQuantity(card);
+        };
+
+        vm.upForTradeQuantity = function (card) {
+            TradeBindersFactory.upForTradeCardQuantity(card);
+        };
+
+
+
+        vm.lowerForTradeQuantity = function (card) {
+            TradeBindersFactory.lowerForTradeCardQuantity(card);
         };
 
 
