@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular
-            .module('TradeBinders.TradeBindersDirective', [])
+            .module('TradeBinders.tradeBindersDirective', [])
             .directive('tradeBindersDirective', tradeBindersDirective);
 
     function tradeBindersDirective() {

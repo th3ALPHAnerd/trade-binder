@@ -1,13 +1,13 @@
 (function () {
     'use strict';
 
-    angular.module('Account.Register', ['ngRoute', 'Account.Register.RegisterController'])
-            .config(['$routeProvider', function ($routeProvider) {
-                    $routeProvider
-                            .when('/register', {
-                                
+    angular.module('Account.Register', ['ui.router', 'Account.Register.RegisterController'])
+            .config(['$stateProvider', function ($stateProvider) {
+                    $stateProvider
+                            .state('register', {
+                                url:'/register',
                                 templateUrl: 'app/account/register/register.html',
-                                controller: 'RegisterCtrl',
+                                controller: 'RegisterController',
                                 controllerAs: 'register',
                                 resolve: []
                             });

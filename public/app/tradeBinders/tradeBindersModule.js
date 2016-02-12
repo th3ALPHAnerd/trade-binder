@@ -1,14 +1,14 @@
 (function () {
     'use strict';
 
-    angular.module('tradeBinders', ['ui.router', 'tradeBinders.TradeBindersController'])
+    angular.module('TradeBinders', ['ui.router', 'TradeBinders.TradeBindersController', 'TradeBinders.tradeBindersDirective'])
             .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('tradeBinders', {
                                 url: '/tradeBinders',
                                 templateUrl: 'app/tradeBinders/tradeBinders.html',
                                 controller: 'TradeBindersController',
-                                controllerAs: 'TradeBinder',
+                                controllerAs: 'tradeBinder',
                                 resolve: []
                             });
                 }]);

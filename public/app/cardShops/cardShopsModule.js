@@ -1,11 +1,11 @@
 (function () {
     'use strict';
     
-    angular.module('cardShops', ['ngRoute'])
-            .config(['$routeProvider',function ($routeProvider) {
-                    $routeProvider
-                    .when('/cardShops', {
-                        //url:'/cardShops',
+    angular.module('cardShops', ['ui.router'])
+            .config(['$stateProvider',function ($stateProvider) {
+                    $stateProvider
+                    .state('cardShops', {
+                        url:'/cardShops',
                         templateUrl: 'app/cardShops/cardShops.html',
                         resolve:[]
                     });

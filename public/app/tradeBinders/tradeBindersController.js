@@ -42,12 +42,9 @@
             TradeBindersFactory.upForTradeCardQuantity(card);
         };
 
-
-
         vm.lowerForTradeQuantity = function (card) {
             TradeBindersFactory.lowerForTradeCardQuantity(card);
         };
-
 
     }
 })();

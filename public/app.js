@@ -2,13 +2,14 @@
     'use strict';
 
     angular.module('app', [
-        'tradeBinders',
+        'TradeBinders',
         'account.signIn',
         'Account.Register',
         'cardShops',
         'search',
         'angular-jwt',
-        'angular-storage'
+        'angular-storage',
+        'ui.router'
     ])
      .config(function myConfig(jwtInterceptorProvider, $httpProvider) {
                 jwtInterceptorProvider.tokenGetter = function (store) {
