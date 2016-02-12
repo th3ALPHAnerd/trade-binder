@@ -45,20 +45,40 @@
                         });
             },
             removeCard: function (name) {
-                console.log(name);
+                //console.log(name);
                 var index = Collection.indexOf(name);
-                console.log(index);
+                //console.log(index);
                 Collection.splice(index, 1);
-                console.log(Collection);
+                //console.log(Collection);
             },
-            upCardQuantity: function (name) {
+            upOwnedCardQuantity: function (name) {
                 var indexOf = Collection.indexOf(name);
                 Collection[indexOf].ownedQuantity += 1;
             },
-            lowerCardQuantity: function (name) {
+            lowerOwnedCardQuantity: function (name) {
                 var indexOf = Collection.indexOf(name);
                 if (Collection[indexOf].ownedQuantity >= 1) {
                     Collection[indexOf].ownedQuantity -= 1;
+                }
+            },
+             upWantCardQuantity: function (name) {
+                var indexOf = Collection.indexOf(name);
+                Collection[indexOf].want += 1;
+            },
+            lowerWantCardQuantity: function (name) {
+                var indexOf = Collection.indexOf(name);
+                if (Collection[indexOf].want >= 1) {
+                    Collection[indexOf].want -= 1;
+                }
+            }, 
+            upForTradeCardQuantity: function (name) {
+                var indexOf = Collection.indexOf(name);
+                Collection[indexOf].forTrade += 1;
+            },
+            lowerForTradeCardQuantity: function (name) {
+                var indexOf = Collection.indexOf(name);
+                if (Collection[indexOf].forTrade >= 1) {
+                    Collection[indexOf].forTrade -= 1;
                 }
             }
         };
