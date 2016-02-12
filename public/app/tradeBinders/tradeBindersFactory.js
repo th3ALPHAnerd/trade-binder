@@ -45,11 +45,11 @@
                         });
             },
             removeCard: function (name) {
-                console.log(name);
+                //console.log(name);
                 var index = Collection.indexOf(name);
-                console.log(index);
+                //console.log(index);
                 Collection.splice(index, 1);
-                console.log(Collection);
+                //console.log(Collection);
             },
             upOwnedCardQuantity: function (name) {
                 var indexOf = Collection.indexOf(name);
