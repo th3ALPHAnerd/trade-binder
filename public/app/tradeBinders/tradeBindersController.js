@@ -8,6 +8,10 @@
         var vm = this;
 
         vm.cards = TradeBindersFactory.getCards();
+        
+        vm.sortType = 'name';
+        vm.sortReverse = false;
+        
 
         vm.addCards = function (cards) {
             if (cards.length > 0) {

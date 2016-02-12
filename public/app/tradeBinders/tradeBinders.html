@@ -14,27 +14,52 @@
         <div class="row" ng-show="tradeBinder.cards.length != 0">
             <div class="col-lg-offset-3 col-md-offset-3">
                 <div class="col-lg-3 col-md-3">
-                    <strong>Card Name</strong>
+                    <button type="button" class="btn btn-block btn-link"
+                            ng-click="sortType = 'name';
+                                        sortReverse = !sortReverse">
+                        <strong>Card Name</strong>
+                        <span ng-show="sortType == 'name' && !sortReverse"><i class="fa fa-sort-amount-asc"></i></span>
+                        <span ng-show="sortType == 'name' && sortReverse"><i class="fa fa-sort-amount-desc"></i></span>
+                    </button>
                 </div>
                 <div class="col-lg-2 col-md-2">
-                    <strong># Have</strong>
+                    <button type="button" class="btn btn-block btn-link"
+                            ng-click="sortType = 'ownedQuantity';
+                                        sortReverse = !sortReverse">
+                        <strong># Have</strong>
+                        <span ng-show="sortType == 'ownedQuantity' && !sortReverse"><i class="fa fa-sort-amount-asc"></i></span>
+                        <span ng-show="sortType == 'ownedQuantity' && sortReverse"><i class="fa fa-sort-amount-desc"></i></span>
+                    </button>
                 </div>
                 <div class="col-lg-2 col-md-2">
-                    <strong># for Trade</strong>
+                    <button type="button" class="btn btn-block btn-link"
+                            ng-click="sortType = 'forTrade';
+                                        sortReverse = !sortReverse">
+                        <strong># Trade</strong>
+                        <span ng-show="sortType == 'forTrade' && !sortReverse"><i class="fa fa-sort-amount-asc"></i></span>
+                        <span ng-show="sortType == 'forTrade' && sortReverse"><i class="fa fa-sort-amount-desc"></i></span>
+                    </button>
                 </div>
                 <div class="col-lg-2 col-md-2">
+                    <button type="button" class="btn btn-block btn-link"
+                            ng-click="sortType = 'want';
+                                        sortReverse = !sortReverse">
                     <strong># Want</strong>
+                    <span ng-show="sortType == 'want' && !sortReverse"><i class="fa fa-sort-amount-asc"></i></span>
+                        <span ng-show="sortType == 'want' && sortReverse"><i class="fa fa-sort-amount-desc"></i></span>
+                    </button>
                 </div>
                 <div class="col-lg-1 col-md-1">
-                    <strong>Delete</strong>
+                    
                 </div>
             </div>
         </div>
-        <div class="row" ng-repeat="card in tradeBinder.cards track by $index">
+        <div class="row" ng-repeat="card in tradeBinder.cards| orderBy:sortType:sortReverse  ">
             <div class="col-lg-offset-3 col-md-offset-3">
 
                 <div class="col-lg-3 col-md-3">
-                    <span trade-binders-directive name="{{card.name}}" card-image="{{card.image}}"></span>
+                    <div ng-hide="true">{{card.name}}</div>
+                    <div data-trade-binders-directive name="{{card.name}}" card-image="{{card.image}}"></div>
                 </div>
                 <div class="col-lg-2 col-md-2">
                     {{card.ownedQuantity}}
@@ -46,7 +71,7 @@
                 </div>
                 <div class="col-lg-2 col-md-2">
                     {{card.forTrade}}
-                     <div class="btn-group-vertical">
+                    <div class="btn-group-vertical">
                         <button type="button" ng-click="tradeBinder.upForTradeQuantity(card)" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
                         <button type="button" ng-click="tradeBinder.lowerForTradeQuantity(card)" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
                     </div>
@@ -54,7 +79,7 @@
                 </div>
                 <div class="col-lg-2 col-md-2">
                     {{card.want}}
-                     <div class="btn-group-vertical">
+                    <div class="btn-group-vertical">
                         <button type="button" ng-click="tradeBinder.upWantQuantity(card)" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span></button>
                         <button type="button" ng-click="tradeBinder.lowerWantQuantity(card)" class="btn btn-link btn-sm"><span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span></button>
                     </div>
