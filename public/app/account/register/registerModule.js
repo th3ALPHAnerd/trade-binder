@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('Account.Register', ['ui.router', 'Account.Register.RegisterController'])
+    angular.module('account.register', ['ui.router', 'account.register.RegisterController'])
             .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('register', {

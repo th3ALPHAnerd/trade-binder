@@ -2,9 +2,9 @@
     'use strict';
 
     angular.module('app', [
-        'TradeBinders',
+        'tradeBinders',
         'account.signIn',
-        'Account.Register',
+        'account.register',
         'cardShops',
         'search',
         'angular-jwt',

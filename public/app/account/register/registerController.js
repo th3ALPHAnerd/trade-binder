@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-            .module('Account.Register.RegisterController', [])
+            .module('account.register.RegisterController', [])
             .controller('RegisterController', RegisterController);
 
     function RegisterController() {
