@@ -15,10 +15,13 @@
     "mongodb": "^2.1.7"
   },
   "devDependencies": {
+    "grunt": "*",
     "grunt-karma": "*",
     "karma": "^0.13.21",
     "karma-firefox-launcher": "*",
     "karma-jasmine": "^0.3.7",
-    "karma-phantomjs-launcher": "^1.0.0"
+    "phantomjs-prebuilt": "*",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-junit-reporter": "*"
   }
 }
