@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('tradeBinders', ['ui.router', 'tradeBinders.TradeBindersController', 'tradeBinders.tradeBindersDirective'])
-            .config(['$stateProvider', function ($stateProvider) {
+            .config(['$stateProvider',['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('tradeBinders', {
                                 url: '/tradeBinders',
@@ -11,5 +11,5 @@
                                 controllerAs: 'tradeBinder',
                                 resolve: []
                             });
-                }]);
+                }]]);
 })();
