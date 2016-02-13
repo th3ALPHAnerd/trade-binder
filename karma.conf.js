@@ -21,7 +21,7 @@ module.exports = function(config) {
       //Serve up the actual files to be tested
       'public/app/**/*.js',
       //Serve up the test files
-      'public/test/spec/*.js'
+      'public/**/spec/*.js'
     ],
 
 
