@@ -80,3 +80,6 @@ etc.
 Everything is controlled through karma.conf.js 
 To run jasmine tests just navigate to the checkout directory and run
 $ karma start
+
+I was able to get it to work with the below command
+$ ./node_modules/karma/bin/karma start
