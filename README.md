@@ -1,5 +1,8 @@
 # tradeBinder
 
+If using Netbeans, make a new project from existing sources and select this 
+folder after check out.
+
 Basic Setup Information
 This application requires Node, NodeJS, MongoDB, and Express. 
 Node v4.2.6 LTS: https://nodejs.org/en/
@@ -56,11 +59,30 @@ node mongodb.js
 
 Should return your user.
 
-****************************************************
-Bower implemented
 
-The bower.json holds a list of external lib, the .bowerrc file tells the files to be placed in the public/assets/libs all you have to do now is just enter the below command in your terminal.
-$ bower install
 
-To add more libs just enter the below command to make sure bower.json is updated
-$ bower install Package-Name --save
+#########################
+Running Jasmine Tests with Karma
+I'm not entirely sure what is needed, but I tried 1000 ways and this finally worked
+Run these commands from the checkout directory
+$ npm install karma --save-dev
+$ npm install karma-phantomjs-launcher --save-dev
+$ npm install karma-jasmine --save-dev
+
+Install bower
+$ npm install -g --save bower
+
+Get the libs you want/need. Our libs folder currently has everything, but we need
+to switch to bower.
+
+$ bower install angular
+$ bower install angular-mocks
+etc.
+
+
+Everything is controlled through karma.conf.js 
+To run jasmine tests just navigate to the checkout directory and run
+$ karma start
+
+I was able to get it to work with the below command
+$ ./node_modules/karma/bin/karma start
