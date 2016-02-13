@@ -1,10 +1,11 @@
 (function () {
     'use strict';
     
-    angular.module('search', ['ngRoute', 'search.SearchController'])
-            .config(['$routeProvider',function ($routeProvider) {
-                    $routeProvider
-                    .when('/search', {
+    angular.module('search', ['ui.router', 'search.SearchController'])
+            .config(['$stateProvider',function ($stateProvider) {
+                    $stateProvider
+                    .state('search', {
+                        url: '/search',
                         templateUrl: 'app/search/search.html',
                         controller: 'SearchController',
                         controllerAs: 'search',

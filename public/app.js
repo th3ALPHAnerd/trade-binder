@@ -7,11 +7,11 @@
         'account.register',
         'cardShops',
         'search',
-        'account',
         'angular-jwt',
-        'angular-storage'
+        'angular-storage',
+        'ui.router'
     ])
-            .config(function myConfig(jwtInterceptorProvider, $httpProvider) {
+     .config(function myConfig(jwtInterceptorProvider, $httpProvider) {
                 jwtInterceptorProvider.tokenGetter = function (store) {
                     return store.get('jwt');
                 };
@@ -28,4 +28,6 @@
                     }
                 });
             });
+    
 })();
+
