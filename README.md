@@ -1,5 +1,8 @@
 # tradeBinder
 
+If using Netbeans, make a new project from existing sources and select this 
+folder after check out.
+
 Basic Setup Information
 This application requires Node, NodeJS, MongoDB, and Express. 
 Node v4.2.6 LTS: https://nodejs.org/en/
