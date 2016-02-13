@@ -55,3 +55,12 @@ type: 'mongo'
 node mongodb.js
 
 Should return your user.
+
+****************************************************
+Bower implemented
+
+The bower.json holds a list of external lib, the .bowerrc file tells the files to be placed in the public/assets/libs all you have to do now is just enter the below command in your terminal.
+$ bower install
+
+To add more libs just enter the below command to make sure bower.json is updated
+$ bower install Package-Name --save
