@@ -1,7 +1,7 @@
 (function () {
     'use strict';
     angular.module('TradeBinder.TradeBindersFactory', ['search.SearchFactory'])
-            .factory('TradeBindersFactory', TradeBindersFactory);
+            .factory('TradeBindersFactory',['SearchFactory', TradeBindersFactory]);
 
     function TradeBindersFactory(SearchFactory) {
         var Collection = [];

@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('search.SearchController', ['search.SearchFactory'])
-            .controller('SearchController', SearchController);
+            .controller('SearchController', ['SearchFactory', SearchController]);
 
     function SearchController(SearchFactory) {
         var vm = this;

@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('account.signIn.signInController', ['ui.router', 'angular-storage'])
-            .controller('signInController', signInController);
+            .controller('signInController', ['$http', 'store', '$state', signInController]);
 
     function signInController($http, store, $state) {
         var vm = this;
