@@ -55,3 +55,28 @@ type: 'mongo'
 node mongodb.js
 
 Should return your user.
+
+
+
+#########################
+Running Jasmine Tests with Karma
+I'm not entirely sure what is needed, but I tried 1000 ways and this finally worked
+Run these commands from the checkout directory
+$ npm install karma --save-dev
+$ npm install karma-phantomjs-launcher --save-dev
+$ npm install karma-jasmine --save-dev
+
+Install bower
+$ npm install -g --save bower
+
+Get the libs you want/need. Our libs folder currently has everything, but we need
+to switch to bower.
+
+$ bower install angular
+$ bower install angular-mocks
+etc.
+
+
+Everything is controlled through karma.conf.js 
+To run jasmine tests just navigate to the checkout directory and run
+$ karma start
