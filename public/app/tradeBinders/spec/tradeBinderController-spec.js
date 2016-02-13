@@ -17,8 +17,9 @@
       
       //Just a quick setup that tests one variable that starts out set as 'name'
 
-      it('should test....', function () {
+      it('should initialize fields', function () {
         expect(vm.sortType).toEqual('name');
+        expect(vm.sortReverse).toBeFalsy();
       });
     });
   });
