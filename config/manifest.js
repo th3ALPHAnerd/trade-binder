@@ -26,20 +26,20 @@ const manifest = {
     'hapi-mongo-models': {
       mongodb: Config.get('/hapiMongoModels/mongodb'),
       models: {
-        Account: './server/models/account',
-        Session: './server/models/session',
-        User: './server/models/user'
+        Account: '../server/models/account',
+        Session: '../server/models/session',
+        User: '../server/models/user'
       },
       autoIndex: Config.get('/hapiMongoModels/autoIndex')
     },
-    './server/auth': {},
-    './server/api/accounts': { basePath: '/api' },
-    './server/api/index': { basePath: '/api' },
-    './server/api/login': { basePath: '/api' },
-    './server/api/logout': { basePath: '/api' },
-    './server/api/sessions': { basePath: '/api' },
-    './server/api/register': { basePath: '/api' },
-    './server/api/users': { basePath: '/api' }
+    '../server/auth': {},
+    '../server/api/accounts': { basePath: '/api' },
+    '../server/api/index': { basePath: '/api' },
+    '../server/api/login': { basePath: '/api' },
+    '../server/api/logout': { basePath: '/api' },
+    '../server/api/sessions': { basePath: '/api' },
+    '../server/api/register': { basePath: '/api' },
+    '../server/api/users': { basePath: '/api' }
   }
 };
 

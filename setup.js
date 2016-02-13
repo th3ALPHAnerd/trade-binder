@@ -9,13 +9,13 @@ const Mongodb = require('mongodb');
 const Handlebars = require('handlebars');
 
 
-const configTemplatePath = Path.resolve(__dirname, 'server-config');
-const configPath = Path.resolve(__dirname, 'config.js');
+const configTemplatePath = Path.resolve(__dirname, './config/server-config.js');
+const configPath = Path.resolve(__dirname, './config/config.js');
 
 if (process.env.NODE_ENV === 'test') {
   const options = { encoding: 'utf-8' };
-  const source = Fs.readFileSync(configTemplatePath, options);
-  const configTemplate = Handlebars.compile(source);
+  const src = Fs.readFileSync(configTemplatePath, options);
+  const configTemplate = Handlebars.compile(src);
   const context = {
     projectName: 'trade-binder',
     mongodbUrl: 'mongodb://localhost:27017/trade-binder',
