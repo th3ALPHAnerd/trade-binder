@@ -1,7 +1,4 @@
 /nbproject
 /node_modules
-<<<<<<< HEAD
+/bower_components
 .directory
-=======
-.directory
->>>>>>> testing/auth0
