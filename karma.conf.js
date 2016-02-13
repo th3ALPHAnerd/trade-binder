@@ -18,10 +18,8 @@ module.exports = function(config) {
       'bower_components/angular/angular.js',
       'bower_components/angular-mocks/angular-mocks.js',
 
-      //Serve up the actual files to be tested
-      'public/app/**/*.js',
-      //Serve up the test files
-      'public/**/spec/*.js'
+      //Serve up the actual files and test files to be tested
+      'public/app/**/*.js'
     ],
 
 
