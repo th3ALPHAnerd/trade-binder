@@ -108,4 +108,5 @@ $ karma start
 
 I was able to get it to work with the below command
 >$ ./node_modules/karma/bin/karma start
+
 -Kent
