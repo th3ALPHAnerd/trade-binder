@@ -10,13 +10,6 @@ app.get('/', function (req, res) {
     });
 });
 
-app.get('/tradeBinder/:name', function (req, res) {
-    var name = req.params.name;
-    console.log(name);
-    res.render(name, function (err, html) {
-        res.send(html);
-    });
-});
 
 var server = app.listen(18080, function () {
     //For some reason address is coming up blank.
