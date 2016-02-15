@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('search', ['ui.router', 'search.SearchController'])
-            .config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
+            .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('search', {
                                 url: '/tradeBinder/search',
@@ -11,10 +11,6 @@
                                 controllerAs: 'search',
                                 resolve: []
                             });
-                    $locationProvider.html5Mode({
-                        enabled: true,
-                        requireBase: false
-                    });
                 }]);
 })();
 

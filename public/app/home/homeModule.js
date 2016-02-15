@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('home', ['ui.router', 'home.HomeController'])
-            .config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
+            .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('home', {
                                 url: '/',
@@ -11,9 +11,5 @@
                                 controllerAs: 'home',
                                 resolve: []
                             });
-                    $locationProvider.html5Mode({
-                        enabled: true,
-                        requireBase: false
-                    });
                 }]);
 })();
