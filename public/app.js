@@ -18,10 +18,10 @@
             };
             $httpProvider.interceptors.push('jwtInterceptor');
 
-            $locationProvider.html5Mode({
-              enabled: true,
-              requireBase: false
-            });
+            // $locationProvider.html5Mode({
+            //   enabled: true,
+            //   requireBase: false
+            // });
           }])
           .run(function ($rootScope, $state, $http, $templateCache, store, jwtHelper) {
             $rootScope.$on('$stateChangeStart', function (e, to) {
