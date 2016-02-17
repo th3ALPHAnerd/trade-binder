@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+
 'use strict';
 
 const Fs = require('fs');
@@ -8,19 +9,16 @@ const Promptly = require('promptly');
 const Mongodb = require('mongodb');
 const Handlebars = require('handlebars');
 
-
 const configTemplatePath = Path.resolve(__dirname, './config/server-config.js');
 const configPath = Path.resolve(__dirname, './config/config.js');
 
 if (process.env.NODE_ENV === 'test') {
   const options = { encoding: 'utf-8' };
-  const src = Fs.readFileSync(configTemplatePath, options);
-  const configTemplate = Handlebars.compile(src);
+  const source = Fs.readFileSync(configTemplatePath, options);
+  const configTemplate = Handlebars.compile(source);
   const context = {
     projectName: 'trade-binder',
     mongodbUrl: 'mongodb://localhost:27017/trade-binder',
-    rootEmail: 'root@root',
-    rootPassword: 'root'
   };
   Fs.writeFileSync(configPath, configTemplate(context));
   console.log('Setup complete.');
@@ -32,13 +30,11 @@ Async.auto({
     Promptly.prompt('Project name: (trade-binder)', { default: 'trade-binder' }, done);
   },
   mongodbUrl: ['projectName', (done, results) => {
-    const promptOptions = {
-      default: 'mongodb://localhost:27017/trade-binder'
-    };
+    const promptOptions = { default: 'mongodb://localhost:27017/trade-binder' };
 
     Promptly.prompt('MongoDB URL: (mongodb://localhost:27017/trade-binder)', promptOptions, done);
   }],
-  testMongo: ['rootPassword', (done, results) => {
+  testMongo: ['mongodbUrl', (done, results) => {
     Mongodb.MongoClient.connect(results.mongodbUrl, {}, (err, db) => {
       if (err) {
         console.error('Failed to connect to Mongodb.');
@@ -49,22 +45,15 @@ Async.auto({
       done(null, true);
     });
   }],
-  rootEmail: ['mongodbUrl', (done, results) => {
-    Promptly.prompt('Root user email:', done);
-  }],
-  rootPassword: ['rootEmail', (done, results) => {
-    Promptly.password('Root user password:', { default: null }, done);
-  }],
-  createConfig: ['rootPassword', (done, results) => {
+  createConfig: ['testMongo', (done, results) => {
     const fsOptions = { encoding: 'utf-8' };
-
     Fs.readFile(configTemplatePath, fsOptions, (err, src) => {
       if (err) {
         console.error('Failed to read config template.');
         return done(err);
       }
 
-      let configTemplate = Handlebars.compile(src);
+      const configTemplate = Handlebars.compile(src);
       Fs.writeFile(configPath, configTemplate(results), done);
     });
   }],
@@ -78,4 +67,3 @@ Async.auto({
   console.log('Setup complete.');
   process.exit(0);
 });
-

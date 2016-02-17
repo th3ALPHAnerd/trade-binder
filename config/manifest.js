@@ -3,11 +3,10 @@
 const Confidence = require('confidence');
 const Config = require('./config');
 
-const criteria = {
-  env: process.env.NODE_ENV
-};
 
+const criteria = { env: process.env.NODE_ENV };
 const manifest = {
+  $meta: 'Conifiguration for the server',
   server: {
     debug: {
       request: ['error']
@@ -23,32 +22,33 @@ const manifest = {
     labels: ['web']
   }],
   plugins: {
+    'hapi-auth-basic': {},
+    'hapi-auth-cookie': {},
+    'crumb': {
+      restful: true
+    },
     'hapi-mongo-models': {
       mongodb: Config.get('/hapiMongoModels/mongodb'),
       models: {
-        Account: '../server/models/account',
-        Session: '../server/models/session',
-        User: '../server/models/user'
+        Account: './server/models/account',
+        Session: './server/models/session',
+        User: './server/models/user'
       },
       autoIndex: Config.get('/hapiMongoModels/autoIndex')
     },
-    '../server/auth': {},
-    '../server/api/accounts': { basePath: '/api' },
-    '../server/api/index': { basePath: '/api' },
-    '../server/api/login': { basePath: '/api' },
-    '../server/api/logout': { basePath: '/api' },
-    '../server/api/sessions': { basePath: '/api' },
-    '../server/api/register': { basePath: '/api' },
-    '../server/api/users': { basePath: '/api' }
+
+    './server/auth': {},
+    './server/api/index': { basePath: '/api' },
+    './server/api/login': { basePath: '/api' },
+    './server/api/logout': { basePath: '/api' },
+    './server/api/register': { basePath: '/api' },
+    './server/web/public': {},
+    './server/web/home': {},
   }
 };
 
+
 const store = new Confidence.Store(manifest);
 
-exports.get = function (key) {
-  return store.get(key, criteria);
-};
-
-exports.meta = function (key) {
-  return store.meta(key, criteria);
-};
+exports.get = function (key) { return store.get(key, criteria); };
+exports.meta = function (key) { return store.meta(key, criteria); };

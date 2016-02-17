@@ -4,6 +4,7 @@ const Confidence = require('confidence');
 
 const criteria = { env: process.env.NODE_ENV };
 const config = {
+  $meta: 'Configuration for the server',
   projectName: '{{projectName}}',
   port: {
     web: {
@@ -16,8 +17,13 @@ const config = {
   baseUrl: {
     $filter: 'env',
     $meta: 'values should not end in "/"',
-    // production: 'Not yet determined',
+    production: '', //not yet implemented
     $default: 'http://127.0.0.1:8000'
+  },
+  cookieSecret: {
+    $filter: 'env',
+    production: process.env.COOKIE_SECRET,
+    $default: '~k3yb04rdK4tz!'
   },
   hapiMongoModels: {
     $filter: 'env',
@@ -39,8 +45,9 @@ const config = {
       },
       autoIndex: true
     }
-  },
+  }
 };
+
 
 const store = new Confidence.Store(config);
 
