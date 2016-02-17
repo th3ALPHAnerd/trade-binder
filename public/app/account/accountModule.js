@@ -5,14 +5,13 @@
             .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('account', {
-                                url: '/account',
+                                url: '/tradeBinder/account',
                                 templateUrl: 'app/account/account.html',
-                        controller: 'accountController',        
-                        resolve: [],
+                                controller: 'accountController',
+                                resolve: [],
                                 data: {
                                     requiresLogin: true
                                 }
-
                             });
                 }]);
 })();

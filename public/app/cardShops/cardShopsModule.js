@@ -1,14 +1,14 @@
 (function () {
     'use strict';
-    
+
     angular.module('cardShops', ['ui.router'])
-            .config(['$stateProvider',function ($stateProvider) {
+            .config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
                     $stateProvider
-                    .state('cardShops', {
-                        url:'/cardShops',
-                        templateUrl: 'app/cardShops/cardShops.html',
-                        resolve:[]
-                    });
+                            .state('cardShops', {
+                                url: '/tradeBinder/cardShops',
+                                templateUrl: 'app/cardShops/cardShops.html',
+                                resolve: []
+                            });
                 }]);
 })();
 

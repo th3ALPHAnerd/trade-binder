@@ -1,5 +1,10 @@
 /nbproject
 /node_modules
 ./node_modules
+/public/assets/libs
+./public/assets/libs
+/bower_components
+./bower_components
+npm-debug.log
 .directory
 .jshintrc

@@ -21,30 +21,27 @@ const manifest = {
     port: Config.get('/port/web'),
     labels: ['web']
   }],
-  plugins: {
-    'hapi-auth-basic': {},
-    'hapi-auth-cookie': {},
-    'crumb': {
-      restful: true
-    },
-    'hapi-mongo-models': {
-      mongodb: Config.get('/hapiMongoModels/mongodb'),
-      models: {
-        Account: './server/models/account',
+  registrations: [
+    { plugin: { register: 'inert', options: {} } },
+    { plugin: { register: 'hapi-auth-basic', options: {} } },
+    { plugin: { register: 'hapi-auth-cookie', options: {}, } },
+    { plugin: { register: 'crumb', options: { restful: true }, } },
+    { plugin: {
+      register: 'hapi-mongo-models',
+      options: {
+        mongodb: Config.get('/hapiMongoModels/mongodb'),
+        models: { Account: './server/models/account',
         Session: './server/models/session',
-        User: './server/models/user'
-      },
-      autoIndex: Config.get('/hapiMongoModels/autoIndex')
-    },
-
-    './server/auth': {},
-    './server/api/index': { basePath: '/api' },
-    './server/api/login': { basePath: '/api' },
-    './server/api/logout': { basePath: '/api' },
-    './server/api/register': { basePath: '/api' },
-    './server/web/public': {},
-    './server/web/home': {},
-  }
+        User: './server/models/user' },
+        autoIndex: Config.get('/hapiMongoModels/autoIndex') },
+    } },
+    { plugin: { register: './server/auth', options: {}, } },
+    { plugin: { register: './server/api/login', options: { basePath: '/api' }, } },
+    { plugin: { register: './server/api/logout', options: { basePath: '/api' }, } },
+    { plugin: { register: './server/api/register', options: { basePath: '/api' }, } },
+    { plugin: { register: './server/web/public', options: {}, } },
+    { plugin: { register: './server/web/home', options: {}, } },
+  ]
 };
 
 

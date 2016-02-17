@@ -1,7 +1,6 @@
 (function () {
     'use strict';
-    angular
-            .module('tradeBinders.tradeBindersDirective', [])
+    angular.module('tradeBinders.tradeBindersDirective', ['ui.router'])
             .directive('tradeBindersDirective', tradeBindersDirective);
 
     function tradeBindersDirective() {
@@ -13,15 +12,10 @@
                 $(el).popover({
                     trigger: 'hover',
                     html: true,
-                    content: '<img src='+attrs.cardImage +'>',
+                    content: '<img src=' + attrs.cardImage + '>',
                     placement: "bottom"
                 });
             }
         };
-
-    }
-    ;
-
-
+    };
 })();
-
