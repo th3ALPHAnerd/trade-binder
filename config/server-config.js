@@ -20,10 +20,10 @@ const config = {
     production: '', //not yet implemented
     $default: 'http://127.0.0.1:8000'
   },
-  cookieSecret: {
+  jwtSecret: {
     $filter: 'env',
     production: process.env.COOKIE_SECRET,
-    $default: '~k3yb04rdK4tz!'
+    $default: 'kO71gSDB3sJZdwJYy8N2MGTkyonM5dohTpEBWvjPqmu0mDYlMQjU5d5OyZEM4CR'
   },
   hapiMongoModels: {
     $filter: 'env',

@@ -9,7 +9,7 @@ const Account = require('./account');
 
 
 var User = BaseModel.extend({
-  constructor: function (attrs) {
+  constructor: (attrs) => {
 
     ObjectAssign(this, attrs);
 
@@ -18,7 +18,7 @@ var User = BaseModel.extend({
       enumerable: false
     });
   },
-  hydrateRoles: function (callback) {
+  hydrateRoles: (callback) => {
     if (!this.roles) {
       this._roles = {};
       return callback(null, this._roles);
@@ -70,7 +70,7 @@ User.indexes = [
 
 User.generatePasswordHash = function (password, callback) {
   Async.auto({
-    salt: function (done) {
+    salt: (done) => {
       Bcrypt.genSalt(10, done);
     },
     hash: ['salt', (done, results) => {
@@ -115,7 +115,7 @@ User.findByCredentials = function (username, password, callback) {
   const self = this;
 
   Async.auto({
-    user: function (done) {
+    user: (done) => {
       const query = {};
 
       if (username.indexOf('@') > -1) { query.email = username.toLowerCase(); }

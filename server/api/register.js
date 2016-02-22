@@ -3,7 +3,6 @@
 const Joi = require('joi');
 const Hoek = require('hoek');
 const Async = require('async');
-const Config = require('../../config/config');
 
 
 exports.register = function (server, options, next) {
@@ -14,14 +13,9 @@ exports.register = function (server, options, next) {
     method: 'POST',
     path: options.basePath + '/register',
     config: {
-      plugins: {
-        'hapi-auth-cookie': {
-          redirectTo: false
-        }
-      },
       auth: {
         mode: 'try',
-        strategy: 'session'
+        strategy: 'jwt'
       },
       validate: {
         payload: {
@@ -33,7 +27,7 @@ exports.register = function (server, options, next) {
       },
       pre: [{
         assign: 'usernameCheck',
-        method: function (request, reply) {
+        method: (request, reply) => {
           const User = request.server.plugins['hapi-mongo-models'].User;
           const conditions = { username: request.payload.username };
 
@@ -52,7 +46,7 @@ exports.register = function (server, options, next) {
         }
       }, {
         assign: 'emailCheck',
-        method: function (request, reply) {
+        method: (request, reply) => {
           const User = request.server.plugins['hapi-mongo-models'].User;
           const conditions = { email: request.payload.email };
 
@@ -71,13 +65,13 @@ exports.register = function (server, options, next) {
         }
       }]
     },
-    handler: function (request, reply) {
+    handler: (request, reply) => {
       const Account = request.server.plugins['hapi-mongo-models'].Account;
       const User = request.server.plugins['hapi-mongo-models'].User;
-      const Session = request.server.plugins['hapi-mongo-models'].Session;
+      const Token = request.server.plugins.token;
 
       Async.auto({
-        user: function (done) {
+        user: (done) => {
           const username = request.payload.username;
           const password = request.payload.password;
           const email = request.payload.email;
@@ -118,27 +112,13 @@ exports.register = function (server, options, next) {
 
           User.findByIdAndUpdate(id, update, done);
         }],
-        session: ['linkUser', 'linkAccount', (done, results) => {
-          Session.create(results.user._id.toString(), done);
+        token: ['linkUser', 'linkAccount', (done, results) => {
+          Token.create(results.linkAccount, done);
         }]
       }, (err, results) => {
         if (err) { return reply(err); }
+        const result = { token: results.token };
 
-        const user = results.linkAccount;
-        const credentials = user.username + ':' + results.session.key;
-        const authHeader = 'Basic ' + new Buffer(credentials).toString('base64');
-        const result = {
-          user: {
-            _id: user._id,
-            username: user.username,
-            email: user.email,
-            roles: user.roles
-          },
-          session: results.session,
-          authHeader: authHeader
-        };
-
-        // request.auth.session.set(result);
         reply(result);
       });
     }
@@ -149,5 +129,6 @@ exports.register = function (server, options, next) {
 
 
 exports.register.attributes = {
-  name: 'register'
+  name: 'register',
+  version: '1.0.0'
 };

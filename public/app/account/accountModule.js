@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('account', ['ui.router', 'account.accountController', 'account.register', 'account.login', 'angular-storage', 'angular-jwt'])
+  angular.module('account', ['account.accountController', 'account.register', 'account.login'])
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
     .state('account', {

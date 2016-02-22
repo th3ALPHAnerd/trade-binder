@@ -2,22 +2,21 @@
   'use strict';
 
   angular.module('app', [
+    'ui.router',
+    'angular-jwt',
+    'angular-storage',
     'home',
     'tradeBinders',
     'account',
     'cardShops',
-    'search',
-    'angular-jwt',
-    'angular-storage',
-    'ui.router'
+    'search'
   ])
   .config(['jwtInterceptorProvider', '$httpProvider', '$locationProvider',
           function myConfig(jwtInterceptorProvider, $httpProvider, $locationProvider) {
             jwtInterceptorProvider.tokenGetter = function (store) {
               return store.get('jwt');
             };
-            // $httpProvider.interceptors.push('jwtInterceptor');
-            $httpProvider.defaults.withCredentials = true;
+            $httpProvider.interceptors.push('jwtInterceptor');
 
             // $locationProvider.html5Mode({
             //   enabled: true,

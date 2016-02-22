@@ -6,7 +6,7 @@ const BaseModel = require('hapi-mongo-models').BaseModel;
 
 
 const Account = BaseModel.extend({
-  constructor: function (attrs) {
+  constructor: (attrs) => {
 
     ObjectAssign(this, attrs);
   }
@@ -25,7 +25,7 @@ Account.schema = Joi.object().keys({
   name: Joi.object().keys({
     first: Joi.string().required(),
     middle: Joi.string().allow(''),
-    last: Joi.string().required()
+    last: Joi.string().allow('')
   }),
   timeCreated: Joi.date()
 });
@@ -43,13 +43,13 @@ Account.create = function (name, callback) {
   const document = {
     name: {
       first: nameParts.shift(),
-      middle: nameParts.length > 1 ? nameParts.shift() : undefined,
-      last: nameParts.join(' ')
+      middle: nameParts.length > 1 ? nameParts.shift() : '',
+      last: nameParts.length > 1 ? nameParts.join(' ') : ''
     },
     timeCreated: new Date()
   };
 
-  this.insertOne(document, function (err, docs) {
+  this.insertOne(document, (err, docs) => {
 
     if (err) {
       return callback(err);

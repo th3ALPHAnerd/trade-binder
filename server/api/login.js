@@ -17,18 +17,13 @@ exports.register = function (server, options, next) {
           password: Joi.string().required()
         }
       },
-      // plugins: {
-      //   'hapi-auth-cookie': {
-      //     redirectTo: false
-      //   }
-      // },
-      // auth: {
-      //   mode: 'try',
-      //   strategy: 'session'
-      // },
+      auth: {
+        mode: 'try',
+        strategy: 'jwt'
+      },
       pre: [{
         assign: 'user',
-        method: function (request, reply) {
+        method: (request, reply) => {
           const User = request.server.plugins['hapi-mongo-models'].User;
           const username = request.payload.username;
           const password = request.payload.password;
@@ -40,34 +35,25 @@ exports.register = function (server, options, next) {
           });
         }
       }, {
-        assign: 'session',
-        method: function (request, reply) {
-          const Session = request.server.plugins['hapi-mongo-models'].Session;
+        assign: 'token',
+        method: (request, reply) => {
+          const Token = request.server.plugins.token;
 
-          Session.create(request.pre.user._id.toString(), (err, session) => {
+          Token.create(request.pre.user, (err, token) => {
             if (err) { return reply(err); }
 
-            return reply(session);
+            return reply(token);
           });
         }
       }]
     },
     handler: function (request, reply) {
-      const credentials = request.pre.session._id.toString() + ':' + request.pre.session.key;
-      const authHeader = 'Basic ' + new Buffer(credentials).toString('base64');
+      const token = request.pre.token;
 
       const result = {
-        user: {
-          _id: request.pre.user._id,
-          username: request.pre.user.username,
-          email: request.pre.user.email,
-          roles: request.pre.user.roles
-        },
-        session: request.pre.session,
-        authHeader: authHeader
+        token: token
       };
 
-      request.auth.session.set(result);
       reply(result);
     }
   });
@@ -78,5 +64,6 @@ exports.register = function (server, options, next) {
 
 
 exports.register.attributes = {
-  name: 'login'
+  name: 'login',
+  version: '1.0.0'
 };

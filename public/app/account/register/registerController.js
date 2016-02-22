@@ -1,34 +1,41 @@
 (function () {
   'use strict';
 
-  angular
-  .module('account.register.RegisterController', ['account.UserService', 'ui.router',])
-  .controller('RegisterController', ['UserService', '$location', '$rootScope', RegisterController]);
+  angular.module('account.register.RegisterController', ['account.UserService'])
+  .controller('RegisterController', ['$state', 'UserService', RegisterController]);
 
-  function RegisterController(UserService, $location, $rootScope) {
+  function RegisterController($state, UserService) {
     var vm = this;
-
-    vm.registerSubmit = register;
 
     function register() {
       vm.dataLoading = true;
       var data = {
         name: vm.name,
         email: vm.email,
-        username: vm.userName,
+        username: vm.username,
         password: vm.password
-      }
-
-      UserService.Create(data).then(function (response) {
+      };
+      UserService.register(data).then(function (response) {
         if (response.success) {
-          alert('Success');
-          $location.path('/login');
+          console.log('Success');
+          $state.go('home');
         } else {
-          alert('Error');
+          alert(response.message);
           vm.dataLoading = false;
         }
       });
+      reset();
     }
+
+    function reset() {
+      vm.name = '';
+      vm.email = '';
+      vm.username = '';
+      vm.password = '';
+    }
+
+
+    vm.registerSubmit = register;
   }
 
 })();

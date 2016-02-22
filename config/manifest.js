@@ -23,30 +23,32 @@ const manifest = {
   }],
   registrations: [
     { plugin: { register: 'inert', options: {} } },
-    { plugin: { register: 'hapi-auth-basic', options: {} } },
-    { plugin: { register: 'hapi-auth-cookie', options: {}, } },
+    // { plugin: { register: 'hapi-auth-basic', options: {} } },
+    { plugin: { register: 'hapi-auth-jwt2', options: {}, } },
     { plugin: { register: 'good', options: {
       reporters: [{
+        opsInterval: 1000,
         reporter: require('good-console'),
-        events: { log: '*', response: '*' }
+        events: { error: '*', log: '*', response: '*' }
       }, {
         reporter: require('good-file'),
-        events: { ops: '*' },
-        config: './server/logs/server-log'
+        events: { ops: '*', error: '*' },
+        config: { path: './server/logs/server-log', rotate: 'daily' }
       } ]
     } } },
     { plugin: { register: 'hapi-mongo-models', options: {
       mongodb: Config.get('/hapiMongoModels/mongodb'),
       models: { Account: './server/models/account',
-        Session: './server/models/session',
         User: './server/models/user' },
-        autoIndex: Config.get('/hapiMongoModels/autoIndex') }, } },
-        { plugin: { register: './server/auth', options: {}, } },
-        { plugin: { register: './server/api/login', options: { basePath: '/api' }, } },
-        { plugin: { register: './server/api/logout', options: { basePath: '/api' }, } },
-        { plugin: { register: './server/api/register', options: { basePath: '/api' }, } },
-        { plugin: { register: './server/web/public', options: {}, } },
-        { plugin: { register: './server/web/home', options: {}, } },
+        autoIndex: Config.get('/hapiMongoModels/autoIndex') },
+    } },
+    { plugin: { register: './server/auth/auth', options: {}, } },
+    { plugin: { register: './server/auth/token', options: {}, } },
+    { plugin: { register: './server/api/login', options: { basePath: '/api' }, } },
+    { plugin: { register: './server/api/register', options: { basePath: '/api' }, } },
+    { plugin: { register: './server/api/secure', options: { basePath: '/api' }, } },
+    { plugin: { register: './server/web/public', options: {}, } },
+    { plugin: { register: './server/web/home', options: {}, } },
   ]
 };
 
