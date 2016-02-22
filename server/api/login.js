@@ -17,15 +17,15 @@ exports.register = function (server, options, next) {
           password: Joi.string().required()
         }
       },
-      plugins: {
-        'hapi-auth-cookie': {
-          redirectTo: false
-        }
-      },
-      auth: {
-        mode: 'try',
-        strategy: 'session'
-      },
+      // plugins: {
+      //   'hapi-auth-cookie': {
+      //     redirectTo: false
+      //   }
+      // },
+      // auth: {
+      //   mode: 'try',
+      //   strategy: 'session'
+      // },
       pre: [{
         assign: 'user',
         method: function (request, reply) {

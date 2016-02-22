@@ -11,15 +11,14 @@ exports.register = function (server, options, next) {
     method: 'DELETE',
     path: options.basePath + '/logout',
     config: {
-      auth: {
-        mode: 'try',
-        strategy: 'session'
-      },
-      plugins: {
-        'hapi-auth-cookie': {
-          redirectTo: false
-        }
-      }
+      // auth: {
+      //   mode: 'try',
+      //   strategy: 'session'
+      // },
+      // plugins: { 'hapi-auth-cookie': {
+      //     redirectTo: false
+      //   }
+      // }
     },
     handler: function (request, reply) {
       const Session = request.server.plugins['hapi-mongo-models'].Session;

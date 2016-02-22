@@ -8,25 +8,18 @@
   function RegisterController(UserService, $location, $rootScope) {
     var vm = this;
 
-    var data = $.param({
-      name: vm.name,
-      email: vm.email,
-      username: vm.userName,
-      password: vm.password
-    });
-
-    var config = {
-      headers : {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8;'
-      }
-    }
-
     vm.registerSubmit = register;
 
     function register() {
-      console.log('hello');
       vm.dataLoading = true;
-      UserService.Create(data, config).then(function (response) {
+      var data = {
+        name: vm.name,
+        email: vm.email,
+        username: vm.userName,
+        password: vm.password
+      }
+
+      UserService.Create(data).then(function (response) {
         if (response.success) {
           alert('Success');
           $location.path('/login');

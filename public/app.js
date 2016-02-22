@@ -16,7 +16,8 @@
             jwtInterceptorProvider.tokenGetter = function (store) {
               return store.get('jwt');
             };
-            $httpProvider.interceptors.push('jwtInterceptor');
+            // $httpProvider.interceptors.push('jwtInterceptor');
+            $httpProvider.defaults.withCredentials = true;
 
             // $locationProvider.html5Mode({
             //   enabled: true,
@@ -28,7 +29,7 @@
               if (to.data && to.data.requiresLogin) {
                 if (!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt'))) {
                   e.preventDefault();
-                  $state.go('signIn');
+                  $state.go('login');
                 }
               }
               $http.get('app/account/register/register.html', {

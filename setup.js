@@ -9,8 +9,10 @@ const Promptly = require('promptly');
 const Mongodb = require('mongodb');
 const Handlebars = require('handlebars');
 
+
 const configTemplatePath = Path.resolve(__dirname, './config/server-config.js');
 const configPath = Path.resolve(__dirname, './config/config.js');
+
 
 if (process.env.NODE_ENV === 'test') {
   const options = { encoding: 'utf-8' };
@@ -24,6 +26,7 @@ if (process.env.NODE_ENV === 'test') {
   console.log('Setup complete.');
   process.exit(0);
 }
+
 
 Async.auto({
   projectName: function (done) {

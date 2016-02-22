@@ -25,22 +25,28 @@ const manifest = {
     { plugin: { register: 'inert', options: {} } },
     { plugin: { register: 'hapi-auth-basic', options: {} } },
     { plugin: { register: 'hapi-auth-cookie', options: {}, } },
-    { plugin: { register: 'crumb', options: { restful: true }, } },
-    { plugin: {
-      register: 'hapi-mongo-models',
-      options: {
-        mongodb: Config.get('/hapiMongoModels/mongodb'),
-        models: { Account: './server/models/account',
+    { plugin: { register: 'good', options: {
+      reporters: [{
+        reporter: require('good-console'),
+        events: { log: '*', response: '*' }
+      }, {
+        reporter: require('good-file'),
+        events: { ops: '*' },
+        config: './server/logs/server-log'
+      } ]
+    } } },
+    { plugin: { register: 'hapi-mongo-models', options: {
+      mongodb: Config.get('/hapiMongoModels/mongodb'),
+      models: { Account: './server/models/account',
         Session: './server/models/session',
         User: './server/models/user' },
-        autoIndex: Config.get('/hapiMongoModels/autoIndex') },
-    } },
-    { plugin: { register: './server/auth', options: {}, } },
-    { plugin: { register: './server/api/login', options: { basePath: '/api' }, } },
-    { plugin: { register: './server/api/logout', options: { basePath: '/api' }, } },
-    { plugin: { register: './server/api/register', options: { basePath: '/api' }, } },
-    { plugin: { register: './server/web/public', options: {}, } },
-    { plugin: { register: './server/web/home', options: {}, } },
+        autoIndex: Config.get('/hapiMongoModels/autoIndex') }, } },
+        { plugin: { register: './server/auth', options: {}, } },
+        { plugin: { register: './server/api/login', options: { basePath: '/api' }, } },
+        { plugin: { register: './server/api/logout', options: { basePath: '/api' }, } },
+        { plugin: { register: './server/api/register', options: { basePath: '/api' }, } },
+        { plugin: { register: './server/web/public', options: {}, } },
+        { plugin: { register: './server/web/home', options: {}, } },
   ]
 };
 

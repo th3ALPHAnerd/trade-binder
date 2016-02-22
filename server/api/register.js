@@ -138,7 +138,7 @@ exports.register = function (server, options, next) {
           authHeader: authHeader
         };
 
-        request.auth.session.set(result);
+        // request.auth.session.set(result);
         reply(result);
       });
     }
