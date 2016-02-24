@@ -12,7 +12,8 @@
   "contributors": [],
   "main": "index.js",
   "scripts": {
-    "setup": "./setup.js"
+    "setup": "./setup.js",
+    "test": "./node_modules/karma/bin/karma start"
   },
   "dependencies": {
     "async": "^1.5.2",
