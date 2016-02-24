@@ -17,7 +17,7 @@ $ npm install
 ```
 
 ### Setup
-__WARNING:__ This will clear all data in existing `users` MongoDB collections. It will also overwrite `/config.js` if one
+__WARNING:__ This will clear all data in existing `users` and `accounts` MongoDB collections. It will also overwrite `/config.js` if one
 exists.
 
 ```bash
