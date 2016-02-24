@@ -37,6 +37,12 @@ Async.auto({
 
     Promptly.prompt('MongoDB URL: (mongodb://localhost:27017/trade-binder)', promptOptions, done);
   }],
+  rootEmail: ['mongodbUrl', (done, results) => {
+    Promptly.prompt('Root user email: root@root', { default: 'root@root' }, done);
+  }],
+  rootPassword: ['rootEmail', (done, results) => {
+    Promptly.password('Root user password: root', { default: 'root' }, done);
+  }],
   testMongo: ['mongodbUrl', (done, results) => {
     Mongodb.MongoClient.connect(results.mongodbUrl, {}, (err, db) => {
       if (err) {
@@ -48,7 +54,7 @@ Async.auto({
       done(null, true);
     });
   }],
-  createConfig: ['testMongo', (done, results) => {
+  createConfig: ['testMongo', 'rootEmail', 'rootPassword', (done, results) => {
     const fsOptions = { encoding: 'utf-8' };
     Fs.readFile(configTemplatePath, fsOptions, (err, src) => {
       if (err) {
@@ -60,6 +66,62 @@ Async.auto({
       Fs.writeFile(configPath, configTemplate(results), done);
     });
   }],
+  setupRootUser: ['createConfig', (done, results) => {
+    const BaseModel = require('hapi-mongo-models').BaseModel;
+    const User = require('./server/models/user');
+    const Account = require('./server/models/account');
+
+    Async.auto({
+      connect: (done) => {
+        BaseModel.connect({ url: results.mongodbUrl }, done);
+      },
+      clean: ['connect', (done) => {
+        Async.parallel([
+          User.deleteMany.bind(User, {}),
+          Account.deleteMany.bind(Account, {})
+        ], done);
+      }],
+      account: ['clean', (done) => {
+        Account.create('Mister Admin', done);
+      }],
+      user: ['clean', (done, dbResults) => {
+        User.create('root', results.rootPassword, results.rootEmail, done);
+      }],
+      linkUser: ['account', 'user', (done, dbResults) => {
+        var id = dbResults.user._id.toString();
+        var update = {
+          $set: {
+            'roles': {
+              id: dbResults.account._id.toString(),
+              name: 'Mister Admin'
+            }
+          }
+        };
+
+        User.findByIdAndUpdate(id, update, done);
+      }],
+      linkAccount: ['account', 'user', (done, dbResults) => {
+        const id = dbResults.account._id.toString();
+        const update = {
+          $set: {
+            user: {
+              id: dbResults.user._id.toString(),
+              name: 'root'
+            }
+          }
+        };
+
+        Account.findByIdAndUpdate(id, update, done);
+      }]
+    }, (err, dbResults) => {
+      if (err) {
+        console.error('Failed to setup root user.');
+        return done(err);
+      }
+
+      done(null, true);
+    });
+  }]
 }, (err, results) => {
   if (err) {
     console.error('Setup failed.');

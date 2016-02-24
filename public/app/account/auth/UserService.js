@@ -14,12 +14,12 @@
 
     function register(data) {
       logout();
-      return $http.post('/api/register', data).then(handleSuccess, handleError('Error creating user'));
+      return $http.post('/api/accounts/register', data).then(handleSuccess, handleError('Error creating user'));
     }
 
     function login(data) {
       logout();
-      return $http.post('/api/login', data).then(handleSuccess, handleError('Error loggin in'));
+      return $http.post('/api/accounts/login', data).then(handleSuccess, handleError('Error loggin in'));
     }
 
     function isLoggedIn() {

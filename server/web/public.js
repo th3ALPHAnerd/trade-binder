@@ -1,21 +1,12 @@
 'use strict';
 
-exports.register = function (plugin, options, next) {
-
-  plugin.route({
-    method: 'GET',
-    path: '/{param*}',
-    handler: {
-      directory: {
-        path: 'public',
-        listing: true
-      }
+exports.get = {
+  handler: {
+    directory: {
+      path: 'public',
+      listing: true,
+      index: true
     }
-  });
-
-
-  next();
+  }
 };
 
-
-exports.register.attributes = { name: 'public' };

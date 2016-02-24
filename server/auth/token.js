@@ -4,7 +4,6 @@ const Jwt = require('jsonwebtoken');
 const Config = require('../config/config');
 
 
-
 const create = function (user, callback) {
   const payload = {
     user: {
