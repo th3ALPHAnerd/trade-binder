@@ -1,7 +1,7 @@
 'use strict';
 
 const Async = require('async');
-const Config = require('../../config/config');
+const Config = require('../config/config');
 
 
 exports.register = (server, options, next) => {

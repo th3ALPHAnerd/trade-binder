@@ -42,13 +42,13 @@ const manifest = {
         User: './server/models/user' },
         autoIndex: Config.get('/hapiMongoModels/autoIndex') },
     } },
-    { plugin: { register: './server/auth/auth', options: {}, } },
-    { plugin: { register: './server/auth/token', options: {}, } },
-    { plugin: { register: './server/api/login', options: { basePath: '/api' }, } },
-    { plugin: { register: './server/api/register', options: { basePath: '/api' }, } },
-    { plugin: { register: './server/api/secure', options: { basePath: '/api' }, } },
-    { plugin: { register: './server/web/public', options: {}, } },
-    { plugin: { register: './server/web/home', options: {}, } },
+    { plugin: { register: './auth/auth', options: {}, } },
+    { plugin: { register: './auth/token', options: {}, } },
+    { plugin: { register: './api/login', options: { basePath: '/api' }, } },
+    { plugin: { register: './api/register', options: { basePath: '/api' }, } },
+    { plugin: { register: './api/secure', options: { basePath: '/api' }, } },
+    { plugin: { register: './web/public', options: {}, } },
+    { plugin: { register: './web/home', options: {}, } },
   ]
 };
 

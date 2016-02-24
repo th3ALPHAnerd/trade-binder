@@ -8,9 +8,8 @@ const BaseModel = require('hapi-mongo-models').BaseModel;
 const Account = require('./account');
 
 
-var User = BaseModel.extend({
-  constructor: (attrs) => {
-
+const User = BaseModel.extend({
+  constructor: function(attrs) {
     ObjectAssign(this, attrs);
 
     Object.defineProperty(this, '_roles', {
@@ -18,7 +17,7 @@ var User = BaseModel.extend({
       enumerable: false
     });
   },
-  hydrateRoles: (callback) => {
+  hydrateRoles: function(callback) {
     if (!this.roles) {
       this._roles = {};
       return callback(null, this._roles);

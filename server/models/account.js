@@ -6,7 +6,7 @@ const BaseModel = require('hapi-mongo-models').BaseModel;
 
 
 const Account = BaseModel.extend({
-  constructor: (attrs) => {
+  constructor: function (attrs) {
 
     ObjectAssign(this, attrs);
   }

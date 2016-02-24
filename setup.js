@@ -10,8 +10,8 @@ const Mongodb = require('mongodb');
 const Handlebars = require('handlebars');
 
 
-const configTemplatePath = Path.resolve(__dirname, './config/server-config.js');
-const configPath = Path.resolve(__dirname, './config/config.js');
+const configTemplatePath = Path.resolve(__dirname, './server/config/server-config.js');
+const configPath = Path.resolve(__dirname, './server/config/config.js');
 
 
 if (process.env.NODE_ENV === 'test') {

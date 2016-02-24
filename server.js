@@ -1,6 +1,6 @@
 'use strict';
 
-const Composer = require('./index');
+const Composer = require('./server/index');
 
 Composer((err, server) => {
   if (err) { throw err; }

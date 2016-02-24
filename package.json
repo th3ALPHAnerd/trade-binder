@@ -9,8 +9,8 @@
     "browser"
   ],
   "author": "Dustin Halbrooks",
-  "contributors": [],
-  "main": "index.js",
+  "contributors": ["Chris Pickett", "Kent Baker"],
+  "main": "./server.js",
   "scripts": {
     "setup": "./setup.js",
     "test": "./node_modules/karma/bin/karma start"
