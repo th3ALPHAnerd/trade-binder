@@ -1,3 +1,17 @@
-<div>
-    Home
+<div class="container">
+  <div class="row">
+    <div class="col-lg-offset-2 col-md-offset-2">
+      <div class="col-lg-4 col-md-4" ng-hide='home.loggedIn'>
+        <strong>You are not logged in</strong>
+      </div>
+      <div class="col-lg-4 col-md-4" ng-show='home.loggedIn'>
+        <strong>You are logged in</strong>
+        <p>Username: {{home.user.username}}<p>
+        <p>email: {{home.user.email}}<p>
+      </div>
+      <div>
+        <button ng-click="home.secure()">Secure Route</button>
+      </div>
+    </div>
+  </div>
 </div>

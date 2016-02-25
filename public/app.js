@@ -2,40 +2,39 @@
   'use strict';
 
   angular.module('app', [
-    'home',
-    'tradeBinders',
-    'account.signIn',
-    'account.register',
-    'cardShops',
-    'search',
+    'ui.router',
     'angular-jwt',
     'angular-storage',
-    'ui.router'
+    'home',
+    'tradeBinders',
+    'account',
+    'cardShops',
+    'search'
   ])
-          .config(['jwtInterceptorProvider', '$httpProvider', '$locationProvider',
-            function myConfig(jwtInterceptorProvider, $httpProvider, $locationProvider) {
-              jwtInterceptorProvider.tokenGetter = function (store) {
-                return store.get('jwt');
-              };
-              $httpProvider.interceptors.push('jwtInterceptor');
+  .config(['jwtInterceptorProvider', '$httpProvider', '$locationProvider',
+          function myConfig(jwtInterceptorProvider, $httpProvider, $locationProvider) {
+            jwtInterceptorProvider.tokenGetter = function (store) {
+              return store.get('jwt');
+            };
+            $httpProvider.interceptors.push('jwtInterceptor');
 
-              $locationProvider.html5Mode({
-                enabled: true,
-                requireBase: false
-              });
-            }])
+            // $locationProvider.html5Mode({
+            //   enabled: true,
+            //   requireBase: false
+            // });
+          }])
           .run(function ($rootScope, $state, $http, $templateCache, store, jwtHelper) {
             $rootScope.$on('$stateChangeStart', function (e, to) {
               if (to.data && to.data.requiresLogin) {
                 if (!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt'))) {
                   e.preventDefault();
-                  $state.go('signIn');
+                  $state.go('login');
                 }
               }
               $http.get('app/account/register/register.html', {
                 cache: $templateCache
               });
-              $http.get('app/account/signIn/signIn.html', {
+              $http.get('app/account/login/login.html', {
                 cache: $templateCache
               });
               $http.get('app/tradeBinders/tradeBinders.html', {

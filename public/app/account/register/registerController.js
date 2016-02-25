@@ -1,30 +1,42 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular
-            .module('account.register.RegisterController', [])
-            .controller('RegisterController', RegisterController);
+  angular.module('account.register.RegisterController', ['account.UserService'])
+  .controller('RegisterController', ['$state', 'UserService', RegisterController]);
 
-    function RegisterController() {
-        var vm = this;
+  function RegisterController($state, UserService) {
+    var vm = this;
 
-//        vm.registerSubmit = function ($http, store, $state) {
-//            //need to figure out the api endpoint
-//            var userUrl = 'http://localhost:3001/users';
-//            var user = {userName: vm.userName, email: vm.email, password: vm.password, zipCode: vm.zipCode };
-//            $http({
-//                url: userUrl,
-//                method: 'POST',
-//                data: user
-//            }).then(function (response) {
-//                store.set('jwt', response.data.id_token);
-//                $state.go('account');
-//            }, function (error) {
-//                alert(error.data);
-//            });
-//        };
+    function register() {
+      vm.dataLoading = true;
+      var data = {
+        name: vm.name,
+        email: vm.email,
+        username: vm.username,
+        password: vm.password
+      };
+      UserService.register(data).then(function (response) {
+        if (response.success) {
+          console.log('Success');
+          $state.go('home');
+        } else {
+          alert(response.message);
+          vm.dataLoading = false;
+        }
+      });
+      reset();
     }
 
+    function reset() {
+      vm.name = '';
+      vm.email = '';
+      vm.username = '';
+      vm.password = '';
+    }
+
+
+    vm.registerSubmit = register;
+  }
 
 })();
 

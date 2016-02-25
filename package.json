@@ -9,10 +9,33 @@
     "browser"
   ],
   "author": "Dustin Halbrooks",
-  "contributors": [],
+  "contributors": ["Chris Pickett", "Kent Baker"],
+  "main": "./server.js",
+  "scripts": {
+    "setup": "./setup.js",
+    "test": "./node_modules/karma/bin/karma start"
+  },
   "dependencies": {
-    "express": "^4.13.4",
-    "mongodb": "^2.1.7"
+    "async": "^1.5.2",
+    "bcrypt": "^0.8.5",
+    "boom": "^3.1.2",
+    "confidence": "^1.4.2",
+    "glue": "^3.2.0",
+    "good": "^6.6.0",
+    "good-console": "^5.3.1",
+    "good-file": "^5.1.2",
+    "good-http": "^5.1.0",
+    "handlebars": "^4.0.5",
+    "hapi": "^13.0.0",
+    "hapi-auth-basic": "^4.1.0",
+    "hapi-auth-jwt2": "^5.4.1",
+    "hapi-mongo-models": "^4.1.0",
+    "hoek": "^3.0.4",
+    "joi": "^8.0.1",
+    "jsonwebtoken": "^5.7.0",
+    "mongodb": "^2.1.7",
+    "node-uuid": "^1.4.7",
+    "object-assign": "^4.0.1"
   },
   "devDependencies": {
     "grunt": "*",
