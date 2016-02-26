@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('search', ['ui.router', 'search.SearchController'])
-            .config(['$stateProvider', function ($stateProvider) {
+            .config(['$stateProvider', '$httpProvider', function ($stateProvider, $httpProvider) {
                     $stateProvider
                             .state('search', {
                                 url: '/tradeBinder/search',
@@ -11,6 +11,8 @@
                                 controllerAs: 'search',
                                 resolve: []
                             });
+                            
+                            delete $httpProvider.defaults.headers.common['X-Requested-With'];
                 }]);
 })();
 

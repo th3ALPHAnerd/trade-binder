@@ -9,24 +9,35 @@
         </div>
     </form>
     <div class="container">
-        <div class="row">
-            <div class="col-lg-offset-2 col-md-offset-2">
-                <div class="col-lg-4 col-md-4">
-                    <strong>Card Name</strong>
-                </div>
-                <div class="col-lg-4 col-md-4">
-                    <strong>Card Image</strong>
-                </div>
-            </div>
-        </div>
-        <div class="row" ng-repeat="card in search.cards track by $index">
-            <div class="col-lg-offset-2 col-md-offset-2">
-                <div class="col-lg-4 col-md-4">{{card.name}}</div>
+        <div class="table-responsive"
+             ng-show="search.cards.length !== 0"
+             style="margin: 0 auto !important; float: none !important;">
+            <table>
+                <thead>
+                    <tr>
+                        <td>
+                            <strong>Card Name</strong>
+                        </td>
+                        <td class="text-center">
+                            <strong>Card Image</strong>
+                        </td>
+                    </tr>
+                </thead>
+                <tr ng-repeat="card in search.cards track by $index">
+                    <td>
+                        {{card.name}}
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-3" ng-repeat="edition in card.editions track by $index" ng-show="{{edition.multiverse_id}} != 0">
+                                <a  ng-href="{{edition.store_url}}"><img   class="img-responsive" ng-src="{{edition.image_url}}"/></a>
+                            </div>
+                        </div>
 
-                <div class="col-lg-4 col-md-4">
-                    <a ng-repeat="edition in card.editions track by $index" ng-href="{{edition.store_url}}"><img   class="img-responsive" ng-src="{{edition.image_url}}" ng-show="{{edition.multiverse_id}} != 0"/></a>
-                </div>
-            </div>
+                    </td>
+                </tr>
+            </table>
+
         </div>
     </div>
 </div>
