@@ -9,7 +9,10 @@
     "browser"
   ],
   "author": "Dustin Halbrooks",
-  "contributors": ["Chris Pickett", "Kent Baker"],
+  "contributors": [
+    "Chris Pickett",
+    "Kent Baker"
+  ],
   "main": "./server.js",
   "scripts": {
     "setup": "./setup.js",
@@ -35,7 +38,8 @@
     "jsonwebtoken": "^5.7.0",
     "mongodb": "^2.1.7",
     "node-uuid": "^1.4.7",
-    "object-assign": "^4.0.1"
+    "object-assign": "^4.0.1",
+    "promptly": "^1.0.0"
   },
   "devDependencies": {
     "grunt": "*",
