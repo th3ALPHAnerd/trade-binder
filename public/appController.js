@@ -7,7 +7,6 @@
     function appController(UserService, $state) {
         UserService.logout();
         $state.go('home');
-    };
+    }
 
 })();
-

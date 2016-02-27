@@ -40,7 +40,7 @@
                                                         want: 0,
                                                         image: cardImage
                                                     });
-                                                })
+                                                });
                                     });
                         });
             },

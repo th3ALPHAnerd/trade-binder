@@ -44,7 +44,11 @@ gulp.task('test', function (cb) {
 
 // Lint Task
 gulp.task('lint', function () {
-    return gulp.src('public/src/**/*.js')
+    return gulp.src([
+    'public/app/**/*.js',
+    'public/app.js',
+    'public/appController.js'
+      ])
             .pipe(jshint())
             .pipe(jshint.reporter('default'));
 });
