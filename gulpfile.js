@@ -64,8 +64,7 @@ gulp.task('scripts', ['cleanJs'], function () {
               'public/**/cardShopsModule.js',
               'public/**/searchModule.js',
               'public/**/tradeBindersModule.js',
-	      'public/**/*.js',
-              'public/**/*.*.js',
+	      'public/app/**/*.js',
 	      '!public/assets/**',
 	      '!public/dist/*',
               '!public/**/*.spec.js'

@@ -9,8 +9,8 @@
         'tradeBinders',
         'account',
         'cardShops',
-        'search',
-        'app.appController'
+        'search'//,
+        //'app.appController'
     ])
 
             .config(['jwtInterceptorProvider', '$httpProvider', '$stateProvider',
