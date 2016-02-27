@@ -16,6 +16,6 @@
       function (error) { alert('You\'re not authed'); });
     };
 
-
   }
+  
 })();

@@ -17,7 +17,12 @@ gulp.task('bower', function(){
 
 //Clean js in dist folder
 gulp.task('cleanJs', function (cb) {
-    return del(['public/dist/**.js', '!public/dist'], cb);
+    return del([
+    'public/dist/**.js',
+    'public/dist/**.map', 
+    '!public/dist'
+      
+    ], cb);
 });
 
 //Clean html
@@ -51,6 +56,7 @@ gulp.task('scripts', ['cleanJs'], function () {
     return gulp.src(
             [
 	      'public/app.js',
+	      'public/appController.js',
               'public/**/registerModule.js',
               'public/**/loginModule.js',
               'public/**/accountModule.js',
@@ -61,14 +67,14 @@ gulp.task('scripts', ['cleanJs'], function () {
 	      'public/**/*.js',
               'public/**/*.*.js',
 	      '!public/assets/**',
-	      '!public/dist',
+	      '!public/dist/*',
               '!public/**/*.spec.js'
             ])
             //.pipe(sourcemaps.init())
             .pipe(concat('all.js'))
             //.pipe(rename('app.min.js'))
             //.pipe(uglify())
-            //.pipe(sourcemaps.write())
+            //.pipe(sourcemaps.write('/'))
             .pipe(gulp.dest('public/dist'));
 });
 
