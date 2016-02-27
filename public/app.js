@@ -8,14 +8,13 @@
         'home',
         'tradeBinders',
         'account',
-        //'account.UserService',
         'cardShops',
         'search'
     ])
             .controller('appController', ['UserService', '$state', appController])
 
-            .config(['jwtInterceptorProvider', '$httpProvider', '$locationProvider', '$stateProvider',
-                function myConfig(jwtInterceptorProvider, $httpProvider, $locationProvider, $stateProvider) {
+            .config(['jwtInterceptorProvider', '$httpProvider', '$stateProvider',
+                function myConfig(jwtInterceptorProvider, $httpProvider, $stateProvider) {
                     jwtInterceptorProvider.tokenGetter = function (store) {
                         return store.get('jwt');
                     };
@@ -23,7 +22,7 @@
 
                     $stateProvider
                             .state('logout', {
-                                controller: 'appController',
+                                controller: 'appController'
                             });
 
                 }])
@@ -56,7 +55,7 @@
     function appController(UserService, $state) {
         UserService.logout();
         $state.go('home');
-    };
+    }
 
 
 })();
