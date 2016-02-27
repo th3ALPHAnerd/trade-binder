@@ -48,17 +48,25 @@ gulp.task('lint', function () {
 gulp.task('scripts', ['cleanJs'], function () {
     return gulp.src(
             [
-                'public/**/*.js',
-                'public/**/*.*.js',
-		'!public/assets/**',
-		'!public/dist',
-                '!public/**/*.spec.js'
+	      'public.app.js',
+                'public/**/registerModule.js',
+                'public/**/loginModule.js',
+                'public/**/accountModule.js',
+                'public/**/homeModule.js',
+                'public/**/cardShopsModule.js',
+                'public/**/searchModule.js',
+                'public/**/tradeBindersModule.js',
+	      'public/**/*.js',
+              'public/**/*.*.js',
+	      '!public/assets/**',
+	      '!public/dist',
+              '!public/**/*.spec.js'
             ])
             .pipe(sourcemaps.init())
             .pipe(concat('all.js'))
-            .pipe(rename('app.min.js'))
-            .pipe(uglify())
-            .pipe(sourcemaps.write('/'))
+            //.pipe(rename('app.min.js'))
+            //.pipe(uglify())
+            //.pipe(sourcemaps.write('/'))
             .pipe(gulp.dest('public/dist'));
 });
 
