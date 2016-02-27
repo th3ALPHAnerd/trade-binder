@@ -45,12 +45,13 @@
   "devDependencies": {
     "grunt": "*",
     "grunt-karma": "*",
+    "gulp": "^3.9.1",
     "karma": "^0.13.21",
     "karma-chrome-launcher": "^0.2.2",
     "karma-firefox-launcher": "*",
     "karma-jasmine": "^0.3.7",
-    "phantomjs-prebuilt": "*",
+    "karma-junit-reporter": "*",
     "karma-phantomjs-launcher": "^1.0.0",
-    "karma-junit-reporter": "*"
+    "phantomjs-prebuilt": "*"
   }
 }
