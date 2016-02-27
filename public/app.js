@@ -8,6 +8,7 @@
         'home',
         'tradeBinders',
         'account',
+        'account.UserService',
         'cardShops',
         'search'
     ])
