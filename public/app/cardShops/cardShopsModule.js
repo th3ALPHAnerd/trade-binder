@@ -1,7 +1,7 @@
 (function () {
     'use strict';
 
-    angular.module('cardShops', ['ui.router'])
+    angular.module('cardShops', [])
             .config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
                     $stateProvider
                             .state('cardShops', {

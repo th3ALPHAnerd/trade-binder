@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('search', ['ui.router', 'search.SearchController'])
+  angular.module('search', ['search.SearchController'])
   .config(['$stateProvider', '$httpProvider', function ($stateProvider, $httpProvider) {
     $stateProvider
     .state('search', {

@@ -20,6 +20,8 @@ gulp.task('cleanJs', function (cb) {
     return del(['public/dist/**/*.js', '!public/dist'], cb);
 });
 
+//Clean html
+
 //Clean dist folder
 gulp.task('clean:dist', function (cb) {
     return del(['public/dist/**', '!public/dist'], cb);
@@ -49,20 +51,20 @@ gulp.task('scripts', ['cleanJs'], function () {
     return gulp.src(
             [
 	      'public.app.js',
-                'public/**/registerModule.js',
-                'public/**/loginModule.js',
-                'public/**/accountModule.js',
-                'public/**/homeModule.js',
-                'public/**/cardShopsModule.js',
-                'public/**/searchModule.js',
-                'public/**/tradeBindersModule.js',
+              'public/**/registerModule.js',
+              'public/**/loginModule.js',
+              'public/**/accountModule.js',
+              'public/**/homeModule.js',
+              'public/**/cardShopsModule.js',
+              'public/**/searchModule.js',
+              'public/**/tradeBindersModule.js',
 	      'public/**/*.js',
               'public/**/*.*.js',
 	      '!public/assets/**',
 	      '!public/dist',
               '!public/**/*.spec.js'
             ])
-            .pipe(sourcemaps.init())
+            //.pipe(sourcemaps.init())
             .pipe(concat('all.js'))
             //.pipe(rename('app.min.js'))
             //.pipe(uglify())
