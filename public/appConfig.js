@@ -3,7 +3,7 @@
 
     angular.module('app.appConfig', [
         'angular-jwt',
-        'angular-storage',
+        //'angular-storage',
         'app.appController'
     ])
 
