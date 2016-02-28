@@ -7,7 +7,17 @@ var Server = require('karma').Server;
 var del = require('del');
 var sourcemaps = require('gulp-sourcemaps');
 var bower = require('gulp-bower');
+var watch = require('gulp-watch');
 
+
+gulp.task('watchScripts', function(){
+gulp.watch([
+    'public/app/**/*.js',
+    'public/app.js',
+    'public/appController.js',
+    'public/appConfig.js'
+      ], ['scripts']);
+});
 
 gulp.task('bower', function(){
   return bower();

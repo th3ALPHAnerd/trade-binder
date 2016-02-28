@@ -19,7 +19,6 @@
                             .state('logout', {
                                 controller: 'appController'
                             });
-
                 }]);
 
 })();
