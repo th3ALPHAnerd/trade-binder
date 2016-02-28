@@ -1,4 +1,3 @@
-
 var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var concat = require('gulp-concat');
@@ -8,7 +7,6 @@ var Server = require('karma').Server;
 var del = require('del');
 var sourcemaps = require('gulp-sourcemaps');
 var bower = require('gulp-bower');
-//var unique = require('uniq')
 
 
 gulp.task('bower', function(){
@@ -25,7 +23,6 @@ gulp.task('cleanJs', function (cb) {
     ], cb);
 });
 
-//Clean html
 
 //Clean dist folder
 gulp.task('clean:dist', function (cb) {
@@ -47,19 +44,20 @@ gulp.task('lint', function () {
     return gulp.src([
     'public/app/**/*.js',
     'public/app.js',
-    'public/appController.js'
+    'public/appController.js',
+    'public/appConfig.js'
       ])
             .pipe(jshint())
             .pipe(jshint.reporter('default'));
 });
 
 // Concatenate & Minify JS
-gulp.task('scripts', ['moveJs'],function(){
+gulp.task('scripts', function(){
  return gulp.src(
             [
              'public/app.js',
              'public/appController.js',
-	     '!public/appConfig.js',
+	     'public/appConfig.js',
 	     '!public/**/*.spec.js',
 	     'public/app/**/*.js'
             ])
@@ -70,17 +68,6 @@ gulp.task('scripts', ['moveJs'],function(){
             .pipe(sourcemaps.write('/'))
             .pipe(gulp.dest('public/dist'));
   
-});
-
-gulp.task('moveJs', ['cleanJs'], function () {
-    return gulp.src(
-            [
-	      'public/appConfig.js',
-
-            ])
-            .pipe(concat('all.js'))
-
-            .pipe(gulp.dest('public/dist'));
 });
 
 //Default Task
