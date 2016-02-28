@@ -2,7 +2,7 @@
 
 const Joi = require('joi');
 const Async = require('async');
-
+const privateInfo = require('./private');
 
 exports.login = {
   description: 'Logs the user into there account',
@@ -113,7 +113,23 @@ exports.register = {
     const Account = request.server.plugins['hapi-mongo-models'].Account;
     const User = request.server.plugins['hapi-mongo-models'].User;
     const Token = request.server.plugins.token;
+    console.log(request.payload.email);
+    
+    var Mailgun = require('mailgun').Mailgun;
+    console.log(privateInfo.mailgunKey);
 
+var mg = new Mailgun(privateInfo.mailgunKey);
+mg.sendRaw('example@example.com', [request.payload.email],
+  'From: mtgtradeBinder' +
+  '\nTo: ' + request.payload.email+
+  '\nContent-Type: text/html; charset=utf-8'+
+  '\nSubject: MTG Trade Binder Registration '+
+  '\n<p>Thank you for registering with mtgTradeBinder</p><p><a href="www.google.com">link</a></p>',
+  function(err) {
+    if (err) console.log('Oh noes: ' + err);
+    else     console.log('Success');
+})
+    
     Async.auto({
       user: (done) => {
         const username = request.payload.username;
