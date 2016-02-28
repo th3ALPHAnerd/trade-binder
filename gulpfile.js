@@ -53,6 +53,7 @@ gulp.task('lint', function () {
             .pipe(jshint.reporter('default'));
 });
 
+// Concatenate & Minify JS
 gulp.task('scripts', ['moveJs'],function(){
  return gulp.src(
             [
@@ -61,24 +62,6 @@ gulp.task('scripts', ['moveJs'],function(){
 	     '!public/appConfig.js',
 	     '!public/**/*.spec.js',
 	     'public/app/**/*.js'
-//	     ,
-//	     'public/**/homeController.js',
-//	     'public/**/cardShopsModule.js',/
-//	     'public/**/searchModule.js',//
-//	     'public/**/searchController.js',
-//	     'public/**/searchFactory.js',
-//	     'public/**/tradeBindersModule.js',
-//	     'public/**/tradeBindersFactory.js',
-//	     'public/**/tradeBindersController.js',
-//	     'public/**/tradeBindersDirective.js',
-//	     'public/**/UserService.js',
-//	     'public/**/loginModule.js',
-//	     'public/**/loginController.js',
-//	     'public/**/accountModule.js',
-//	     'public/**/accountController.js',
-//	     'public/**/registerModule.js',
-//	     'public/**/registerController.js'
-	      //'public/appController.js',
             ])
             .pipe(sourcemaps.init())
             .pipe(concat('single.js'))
@@ -89,42 +72,14 @@ gulp.task('scripts', ['moveJs'],function(){
   
 });
 
-
-
-// Concatenate & Minify JS
 gulp.task('moveJs', ['cleanJs'], function () {
     return gulp.src(
             [
-//	      '!public/app.js',
 	      'public/appConfig.js',
-//	      '!public/appController.js',
-//              '!public/**/registerModule.js',
-//	      '!public/**/registerController.js',
-//              '!public/**/loginModule.js',
-//              '!public/**/accountModule.js',
-//	      '!public/**/accountController.js',
-//              '!public/**/homeModule.js',
-//	      '!public/**/homeController.js',
-//              '!public/**/cardShopsModule.js',
-//              '!public/**/searchModule.js',
-//	      '!public/**/searchController.js',
-//	      '!public/**/searchFactory.js',
-//              '!public/**/tradeBindersModule.js',
-//	      '!public/**/tradeBindersFactory.js',
-//	      '!public/**/tradeBindersController.js',
-//	      '!public/**/tradeBindersDirective.js',
-//	      '!public/**/UserService.js',
-//	      '!public/**/loginController.js',
-//	      'public/app/**/*.js',
-//	      '!public/assets/**',
-//	      '!public/dist/*',
-//              '!public/**/*.spec.js'
+
             ])
-            //.pipe(sourcemaps.init())
             .pipe(concat('all.js'))
-            //.pipe(rename('app.min.js'))
-            //.pipe(uglify())
-            //.pipe(sourcemaps.write('/'))
+
             .pipe(gulp.dest('public/dist'));
 });
 
