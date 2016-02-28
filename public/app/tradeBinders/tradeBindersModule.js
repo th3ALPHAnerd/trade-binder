@@ -1,7 +1,10 @@
 (function () {
     'use strict';
 
-    angular.module('tradeBinders', ['tradeBinders.TradeBindersController', 'tradeBinders.tradeBindersDirective'])
+    angular.module('tradeBinders', [
+        'tradeBinders.TradeBindersController',
+        'tradeBinders.tradeBindersDirective'
+    ])
             .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('tradeBinders', {

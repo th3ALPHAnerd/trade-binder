@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('account.register.RegisterController', ['account.UserService'])
+  angular.module('account.register.RegisterController', [
+      'account.UserService'
+  ])
   .controller('RegisterController', ['$state', 'UserService', RegisterController]);
 
   function RegisterController($state, UserService) {
@@ -15,6 +17,7 @@
         username: vm.username,
         password: vm.password
       };
+      
       UserService.register(data).then(function (response) {
         if (response.success) {
           console.log('Success');
@@ -34,9 +37,7 @@
       vm.password = '';
     }
 
-
     vm.registerSubmit = register;
   }
 
 })();
-

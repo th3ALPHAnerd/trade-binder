@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('home', ['home.HomeController'])
+  angular.module('home', [
+      'home.HomeController'
+  ])
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
     .state('home', {
@@ -12,4 +14,5 @@
       resolve: []
     });
   }]);
+  
 })();

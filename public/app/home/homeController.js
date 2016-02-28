@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('home.HomeController', ['account.UserService'])
+  angular.module('home.HomeController', [
+      'account.UserService'
+  ])
   .controller('HomeController',['$http', 'UserService',  HomeController]);
 
   function HomeController($http, UserService) {

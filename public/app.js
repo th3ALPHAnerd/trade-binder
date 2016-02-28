@@ -9,23 +9,10 @@
         'tradeBinders',
         'account',
         'cardShops',
-        'search'//,
-        //'app.appController'
+        'search',
+        //'app.appController',
+        'app.appConfig'
     ])
-
-            .config(['jwtInterceptorProvider', '$httpProvider', '$stateProvider',
-                function myConfig(jwtInterceptorProvider, $httpProvider, $stateProvider) {
-                    jwtInterceptorProvider.tokenGetter = function (store) {
-                        return store.get('jwt');
-                    };
-                    $httpProvider.interceptors.push('jwtInterceptor');
-
-                    $stateProvider
-                            .state('logout', {
-                                controller: 'appController'
-                    });
-
-                }])
             .run(['$rootScope', '$state', '$http', '$templateCache', 'store', 'jwtHelper', function ($rootScope, $state, $http, $templateCache, store, jwtHelper) {
                     $rootScope.$on('$stateChangeStart', function (e, to) {
                         if (to.data && to.data.requiresLogin) {
@@ -51,8 +38,5 @@
                         });
                     });
                 }]);
-
-
-
 
 })();

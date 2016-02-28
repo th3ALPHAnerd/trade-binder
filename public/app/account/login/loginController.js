@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('account.login.LoginController', ['account.UserService'])
+  angular.module('account.login.LoginController', [
+      'account.UserService'
+  ])
   .controller('LoginController', ['$state', 'UserService', LoginController]);
 
   function LoginController($state, UserService) {

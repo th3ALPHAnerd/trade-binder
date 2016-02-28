@@ -1,23 +1,25 @@
 (function () {
-  'use strict';
-  angular
-  .module('search.SearchFactory', [])
-  .factory('SearchFactory',['$http', SearchFactory]);
+    'use strict';
 
-  function SearchFactory($http) {
-    //var url = "https://api.deckbrew.com/mtg/cards?name=";
+    angular
+            .module('search.SearchFactory', [])
+            .factory('SearchFactory', ['$http', SearchFactory]);
 
-    var SearchFactory = {};
+    function SearchFactory($http) {
+        //var url = "https://api.deckbrew.com/mtg/cards?name=";
 
-    SearchFactory.getCards = function (name) {
-      return $http({
-        method: 'GET',
-        url: "https://api.deckbrew.com/mtg/cards?name=" + name +"",
-        skipAuthorization: true
-      });
-    };
+        var SearchFactory = {};
 
-    return SearchFactory;
-  }
+        SearchFactory.getCards = function (name) {
+            return $http({
+                method: 'GET',
+                url: "https://api.deckbrew.com/mtg/cards?name=" + name + "",
+                skipAuthorization: true
+            });
+        };
+
+        return SearchFactory;
+    }
+    
 })();
 
