@@ -6,7 +6,6 @@
 
     function accountController() {
       //nothing yet
-    };
+    }
 
 })();
-

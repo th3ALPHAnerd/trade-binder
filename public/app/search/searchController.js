@@ -1,7 +1,9 @@
 (function () {
     'use strict';
 
-    angular.module('search.SearchController', ['search.SearchFactory'])
+    angular.module('search.SearchController', [
+        'search.SearchFactory'
+    ])
             .controller('SearchController', ['SearchFactory', SearchController]);
 
     function SearchController(SearchFactory) {
