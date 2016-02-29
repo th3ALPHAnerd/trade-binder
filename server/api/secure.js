@@ -6,7 +6,8 @@ exports.secure = {
   tags: ['api'],
   auth: {
     mode: 'required',
-    strategy: 'jwt'
+    strategy: 'jwt',
+    scope: 'account'
   },
   handler: (request, reply) => {
     reply({ message: 'You are secure.' });
