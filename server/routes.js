@@ -12,6 +12,7 @@ exports.register = function (server, options, next) {
   server.route({ method: 'GET',   path: '/{somethingss*}',                       config: Static.get });
   server.route({ method: 'POST',  path: options.basePath +'/accounts/login',     config: Accounts.login });
   server.route({ method: 'POST',  path: options.basePath +'/accounts/register',  config: Accounts.register });
+  //server.route({ method: 'POST',  path: options.basePath +'/accounts/verify',    config: Accounts.verfiy});
   server.route({ method: 'GET',   path: options.basePath +'/secure',             config: Secure.secure });
 
 

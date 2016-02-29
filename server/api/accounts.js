@@ -32,6 +32,12 @@ exports.login = {
 
           return reply(response).takeover().code(409);
         }
+        console.log('user is verified: '+user.isVerified);
+        if(!user.isVerified){            
+            const response = 'Your email has not been verified';
+            
+            return reply(response).takeover().code(401);
+        }
 
         reply(user);
       });
@@ -112,7 +118,7 @@ exports.register = {
   handler: (request, reply) => {
     const Account = request.server.plugins['hapi-mongo-models'].Account;
     const User = request.server.plugins['hapi-mongo-models'].User;
-    const Token = request.server.plugins.token;
+    //const Token = request.server.plugins.token;
     console.log(request.payload.email);
     
     var Mailgun = require('mailgun').Mailgun;
@@ -171,13 +177,24 @@ mg.sendRaw('example@example.com', [request.payload.email],
 
         User.findByIdAndUpdate(id, update, done);
       }],
-      token: ['linkUser', 'linkAccount', (done, results) => {
-        Token.create(results.linkAccount, done);
-      }]
+      //token: ['linkUser', 'linkAccount', (done, results) => {
+        //Token.create(results.linkAccount, done);
+      //}]
     }, (err, results) => {
-      if (err) { return reply(err); }
+      //if (err) { return reply(err); }
 
-      reply({ token: results.token });
+      //reply({ token: results.token });
     });
   }
+};
+
+exports.verify = { 
+    description: 'Verifies the users account',
+    notes: '',
+    tags:['api'],
+    validate:{
+        payload:{
+            
+        }
+    },
 };
