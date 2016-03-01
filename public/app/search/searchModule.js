@@ -1,8 +1,10 @@
 (function () {
   'use strict';
 
-  angular.module('search', ['ui.router', 'search.SearchController'])
-  .config(['$stateProvider', '$httpProvider', function ($stateProvider, $httpProvider) {
+  angular.module('search', [
+      'search.SearchController'
+  ])
+  .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
     .state('search', {
       url: '/tradeBinder/search',

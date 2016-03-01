@@ -10,3 +10,5 @@
 npm-debug.log
 .directory
 .jshintrc
+/public/dist
+/server/api/private.js

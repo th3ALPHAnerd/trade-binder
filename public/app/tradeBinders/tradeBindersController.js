@@ -2,9 +2,7 @@
     'use strict';
 
     angular.module('tradeBinders.TradeBindersController', ['TradeBinder.TradeBindersFactory'])
-            .controller('TradeBindersController', [ 'TradeBindersFactory', TradeBindersController]);
-
-
+            .controller('TradeBindersController', ['TradeBindersFactory', TradeBindersController]);
 
     function TradeBindersController(TradeBindersFactory) {
         var vm = this;
