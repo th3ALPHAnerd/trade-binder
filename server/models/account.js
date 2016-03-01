@@ -44,7 +44,7 @@ Account.create = function (name, callback) {
     name: {
       first: nameParts.shift(),
       middle: nameParts.length > 1 ? nameParts.shift() : '',
-      last: nameParts.length > 1 ? nameParts.join(' ') : ''
+      last: nameParts ? nameParts.join(' ') : ''
     },
     timeCreated: new Date()
   };

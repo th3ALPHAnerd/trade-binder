@@ -10,7 +10,7 @@ const create = function (user, callback) {
       id: user._id,
       username: user.username,
       email: user.email,
-      roles: user.roles
+      scope: user.hydrateScopes()
     }
   };
   const options = {

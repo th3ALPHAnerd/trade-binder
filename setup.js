@@ -87,11 +87,11 @@ Async.auto({
       user: ['clean', (done, dbResults) => {
         User.create('root', results.rootPassword, results.rootEmail, done);
       }],
-      linkUser: ['account', 'user', (done, dbResults) => {
+      linkAccount: ['account', 'user', (done, dbResults) => {
         var id = dbResults.user._id.toString();
         var update = {
           $set: {
-            'roles': {
+            'account': {
               id: dbResults.account._id.toString(),
               name: 'Mister Admin'
             }
@@ -100,7 +100,7 @@ Async.auto({
 
         User.findByIdAndUpdate(id, update, done);
       }],
-      linkAccount: ['account', 'user', (done, dbResults) => {
+      linkUser: ['account', 'user', (done, dbResults) => {
         const id = dbResults.account._id.toString();
         const update = {
           $set: {

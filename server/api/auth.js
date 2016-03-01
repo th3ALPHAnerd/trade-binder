@@ -144,11 +144,9 @@ exports.register = {
         const id = results.user._id.toString();
         const update = {
           $set: {
-            roles: {
-              account: {
-                id: results.account._id.toString(),
-                name: results.account.name.first + ' ' + results.account.name.last
-              }
+            account: {
+              id: results.account._id.toString(),
+              name: results.account.name.first + ' ' + results.account.name.last
             }
           }
         };
