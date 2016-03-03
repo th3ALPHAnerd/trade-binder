@@ -1,25 +1,37 @@
 (function () {
-    'use strict';
+  'use strict';
 
-    angular.module('app.appConfig', [
-        'angular-jwt',
-        'app.appController'
-    ])
+  angular.module('app.appConfig', ['app.appController'])
 
-            .config(['jwtInterceptorProvider', '$httpProvider', '$stateProvider',
-                function (jwtInterceptorProvider, $httpProvider, $stateProvider) {
+  .config(['jwtInterceptorProvider', '$httpProvider', '$stateProvider', config]);
 
-                    jwtInterceptorProvider.tokenGetter = ['store', function (store) {
-                            return store.get('jwt');
-                        }];
+  function config(jwtInterceptorProvider, $httpProvider, $stateProvider) {
 
-                    $httpProvider.interceptors.push('jwtInterceptor');
+    jwtInterceptorProvider.tokenGetter = ['$http', 'jwtHelper', 'store', function ($http, jwtHelper, store) {
+      var accessToken = store.get('access-token');
+      var refreshToken = store.get('refresh-token');
 
-                    $stateProvider
-                            .state('logout', {
-                                controller: 'appController'
-                            });
-                }]);
+      if (jwtHelper.isTokenExpired(accessToken)) {
+        return $http({
+          url: '/api/auth/refresh',
+          skipAuthorization: true,
+          method: 'POST',
+          data: { refresh_token: refreshToken }
+        }).then(function(response) {
+          accessToken = response.data.access_token;
+          store.set('access-token', accessToken);
+          return accessToken;
+        });
+      }
+      return accessToken;
+    }];
+
+    $httpProvider.interceptors.push('jwtInterceptor');
+    $stateProvider
+    .state('logout', {
+      controller: 'appController'
+    });
+  }
 
 })();
 

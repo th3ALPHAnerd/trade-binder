@@ -9,7 +9,8 @@
     var user = {};
 
     function logout() {
-      store.remove('jwt');
+      store.remove('access-token');
+      store.remove('refresh-token');
     }
 
     function register(data) {
@@ -23,7 +24,7 @@
     }
 
     function isLoggedIn() {
-      if (store.get('jwt')) { return !jwtHelper.isTokenExpired(store.get('jwt')); }
+      if (store.get('access-token')) { return !jwtHelper.isTokenExpired(store.get('access-token')); }
 
       return false;
     }
@@ -31,13 +32,14 @@
     function currentUser() {
       var payload;
       if (isLoggedIn()) {
-        payload = jwtHelper.decodeToken(store.get('jwt'));
+        payload = jwtHelper.decodeToken(store.get('access-token'));
         return payload.user;
       }
     }
 
     function handleSuccess(response) {
-      store.set('jwt', response.data.token);
+      store.set('access-token', response.data.accessToken);
+      store.set('refresh-token', response.data.refreshToken);
 
       return { success: true,  data: response.data };
     }
