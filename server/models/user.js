@@ -57,7 +57,7 @@ User.schema = Joi.object().keys({
       name: Joi.string().required()
     })
   }),
-  isVerified: Joi.boolean(),
+  emailVerified: Joi.boolean(),
   timeCreated: Joi.date()
 });
 
@@ -97,7 +97,7 @@ User.create = function (username, password, email, callback) {
         username: username.toLowerCase(),
         email: email.toLowerCase(),
         password: results.passwordHash.hash,
-        isVerified: false,
+        emailVerified: false,
         timeCreated: new Date()
       };
 
@@ -138,9 +138,12 @@ User.findByCredentials = function (username, password, callback) {
   });
 };
 
-User.isVerified = function(username, callback){
-    
-};
+
+User.findById = function(id, callback){
+    const query = {id: id};
+    this.findOne(query, callback);
+}
+
 
 User.findByUsername = function (username, callback) {
   const query = { username: username.toLowerCase() };
