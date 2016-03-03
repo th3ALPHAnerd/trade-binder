@@ -3,13 +3,15 @@
 
   angular
   .module('account.UserService', [])
-  .factory('UserService', ['$http', 'store', 'jwtHelper', UserService]);
+  .factory('UserService', ['$http', 'store', 'jwtHelper', 'auth', UserService]);
 
-  function UserService($http, store, jwtHelper) {
+  function UserService($http, store, jwtHelper, auth) {
     var user = {};
 
     function logout() {
+      auth.signout();
       store.remove('jwt');
+      store.remove('profile');
     }
 
     function register(data) {
@@ -19,6 +21,7 @@
 
     function login(data) {
       logout();
+      auth.signin({});
       return $http.post('/api/auth/login', data).then(handleSuccess, handleError('Error loggin in'));
     }
 
@@ -38,7 +41,7 @@
 
     function handleSuccess(response) {
       store.set('jwt', response.data.token);
-
+      store.set('profile', response.data.token);
       return { success: true,  data: response.data };
     }
 
