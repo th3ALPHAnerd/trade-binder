@@ -14,4 +14,4 @@ npm-debug.log
 .jshintrc
 /public/dist
 /server/config/private
-./server/config/private
+/server/config/private.js
