@@ -119,8 +119,8 @@ User.findByCredentials = function (username, password, callback) {
     user: (done) => {
       const query = {};
 
-      if (username.indexOf('@') > -1) { query.email = username.toLowerCase(); }
-      else { query.username = username.toLowerCase(); }
+      if (username.indexOf('@') > -1) { query.email = username; }
+      else { query.username = username; }
 
       self.findOne(query, done);
     },
@@ -139,14 +139,14 @@ User.findByCredentials = function (username, password, callback) {
 };
 
 
-User.findById = function(id, callback){
-    const query = {id: id};
-    this.findOne(query, callback);
-}
+//User.findById = function(id, callback){
+//    const query = {id: id};
+//    this.findOne(query, callback);
+//}
 
 
 User.findByUsername = function (username, callback) {
-  const query = { username: username.toLowerCase() };
+  const query = { username: username };
   this.findOne(query, callback);
 };
 

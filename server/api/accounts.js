@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const mailer = require('../lib/mailer.js');
 const Config = require('../config/config');
 const User = require('../models/user');
+const Boom = require('boom');
 
 
 exports.login = {
@@ -36,10 +37,10 @@ exports.login = {
                     const response = 'Invalid username and/or password.';
                     return reply(response).takeover().code(409);
                 }
-                console.log('user is verified: ' + user.emailVerified);
+                //console.log('user is verified: ' + user.emailVerified);
                 if (!user.emailVerified){
                     const response = 'Your email has not been verified';
-                    return reply(response).takeover().code(401);
+                    return reply(response).takeover().code(409);
                 }
 
                 reply(user);
@@ -118,36 +119,24 @@ exports.register = {
             const Account = request.server.plugins['hapi-mongo-models'].Account;
             const User = request.server.plugins['hapi-mongo-models'].User;
             const Token = request.server.plugins.token;   
-            //console.log('Token: ' + Config.get('/jwtSecret'));
-
+            const username = request.payload.username;
+            const password = request.payload.password;
+            const email = request.payload.email;
+            
             Async.auto({
                 user: (done) => {
-                    const username = request.payload.username;
-                    const password = request.payload.password;
-                    const email = request.payload.email;
-                    User.create(username, password, email, done);
                     
-                    var tokenData = {
-                        username: User.name,
-                        id: User._id
-                    };
-                    
-                    var user = {
-                        name: username,
-                        email: email
-                    };
-                    
-                    var key = Config.get('/jwtSecret');
-                    console.log('key: ' +key);
-                    
-                   
-                    var jwtToken = jwt.sign(tokenData, key);
-
-                    console.log('send email');
-                    console.log('email: ' + user.email);
-                    console.log('name: '+ user.name);
-                    mailer.sendEmailVerificationLink(user, jwtToken);
-                    
+                    User.create(username, password, email, done); 
+                    User.findByCredentials(username,password, function(err, user){
+                        if(err){
+                            return reply(Boom.forbidden(err));
+                        }
+                        
+                        //for(var prop in user){
+                            //console.log("User prop: " +prop);
+                        //}
+                        //console.log('userId: '+ user.id);
+                    });
                     
                 },
                 account: ['user', (done, results) => {
@@ -178,7 +167,27 @@ exports.register = {
                             }
                         }
                     };
+                    
+                    
                     User.findByIdAndUpdate(id, update, done);
+                     var tokenData = {
+                        id: results.user._id,
+                        username: username,
+                        password: password
+                    };
+                    
+                    var user = {
+                        username: username,
+                        email: email,
+                        id: results.user._id
+                    };
+                    
+                    var key = Config.get('/jwtSecret');                    
+                   
+                    var jwtToken = jwt.sign(tokenData, key);
+
+                    mailer.sendEmailVerificationLink(user, jwtToken);
+                    
                 }]//,
                 //token: ['linkUser', 'linkAccount', (done, results) => {
                 //    Token.create(results.linkAccount, done);
@@ -186,11 +195,6 @@ exports.register = {
             }, (err, results) => {
                 if (err) { return reply(err); }
 
-                reply({
-                    statusCode: 201,
-                    objectId: User._id,
-  //sessionToken: JwtAuth.createToken({ id: User._id})
-                });
             });
         }
 };
@@ -200,44 +204,58 @@ exports.verifyEmail = {
     notes: 'Returns an access token',
     tags: ['api'],
     handler: (request, reply) => {
-        console.log('verifying Email');
-        console.log(request.params.token);
+        //console.log(request.params.token);
         var token = request.params.token;
         
-        var key = Config.get('/jwtSecret');
-        var decoded = jwt.verify(token, key);
-        
-        jwt.verify(request.params.token, Config.get('/jwtSecret'), function(err,decoded){
+        var key = Config.get('/jwtSecret');        
+       
+        jwt.verify(request.params.token, key, 
+            function(err,decoded){
+            
+            //console.log("password: "+ decoded.password);
+            //console.log("username: "+ decoded.username);
+            
             if(decoded === undefined){
                 return reply(Boom.forbidden("invalid verificaiton link"));
             }
             
-            User.findById(decoded.id, function(err, user){
+            User.findByCredentials(decoded.username, decoded.password, function(err, user){
 
-
-            if (err) {
-        return reply(Boom.badImplementation(err));
-      }
+                if (err) {
+                    return reply(Boom.badImplementation(err));
+                }
       
-      if (user === null) {
-        return reply(Boom.forbidden("invalid verification link"));
-      }
+                if (user === null) {
+                    console.log("user not found");
+                    return reply(Boom.forbidden("invalid verification link"));
+                }
 
-      if (user.isVerified === true) {
-        return reply(Boom.forbidden("account is already verified"));
-      }
+                if (user.isVerified === true) {
+                    return reply(Boom.forbidden("account is already verified"));
+                }
+                
+                const id = user._id;
+                
+                user.emailVerified = true;
+                       
+                User.findByIdAndUpdate(id, user, function(err, result){
+                    
+                    //console.log('result id: '+result._id);
+                    //console.log('result username:  '+result.username);
+                    //console.log('result email verified: '+result.emailVerified);
+                });
+        
+                User.findByUsername(decoded.username, function(err, founduser){
+                    
+                    //console.log('user id: '+ founduser._id);
+                    //console.log('user name: '+ founduser.username);
+                    //console.log('user email: '+ founduser.email);
+                    //console.log('email Verified: '+ founduser.emailVerified);
+            
+                })
 
-      user.emailVerified = true;
-      
-      //new a user.update/save function
-      user.save(function(err){
-        if (err) {
-          return reply(Boom.badImplementation(err));
-        }
-        return reply("account sucessfully verified");
-      });
-    })
+            })
     
-  });
-}
+        });
+    }
 }
