@@ -5,27 +5,18 @@
         'ui.router',
         'angular-jwt',
         'angular-storage',
-        'auth0',
         'home',
         'tradeBinders',
         'account',
         'cardShops',
         'search',
-        //'app.appController',
         'app.appConfig'
     ])
-            .run(['$rootScope', '$state', '$http', '$templateCache', 'store', 'jwtHelper','auth', function ($rootScope, $state, $http, $templateCache, store, jwtHelper,auth) {
+            .run(['$rootScope', '$state', '$http', '$templateCache', 'store', 'jwtHelper',
+                function ($rootScope, $state, $http, $templateCache, store, jwtHelper) {
+
                     $rootScope.$on('$stateChangeStart', function (e, to) {
-                        
-                        var token = store.get('jwt');
-                        
-                        if(token){
-                            if(!jwtHelper.isTokenExpired(token)){
-                                if(!auth.isAuthenicated){
-                                    auth.authenticate(store.get('profile'), token);
-                                }
-                            }
-                        }
+                                                                     
                         if (to.data && to.data.requiresLogin) {
                             if (!store.get('jwt') || jwtHelper.isTokenExpired(store.get('jwt'))) {
                                 e.preventDefault();
