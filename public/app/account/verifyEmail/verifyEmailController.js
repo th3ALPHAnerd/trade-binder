@@ -16,7 +16,6 @@
 
             var user = jwtHelper.decodeToken(vm.token);
 
-            vm.dataLoading = true;
             var data = {
                 username: user.username,
                 password: user.password
@@ -27,7 +26,6 @@
                     $state.go('home');
                 } else {
                     alert(response.message);
-                    vm.dataLoading = false;
                 }
             });
 
