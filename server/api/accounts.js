@@ -203,59 +203,49 @@ exports.verifyEmail = {
     description: 'Verify the user email address',
     notes: 'Returns an access token',
     tags: ['api'],
-    handler: (request, reply) => {
-        //console.log(request.params.token);
-        var token = request.params.token;
-        
-        var key = Config.get('/jwtSecret');        
-       
-        jwt.verify(request.params.token, key, 
-            function(err,decoded){
-            
-            //console.log("password: "+ decoded.password);
-            //console.log("username: "+ decoded.username);
-            
-            if(decoded === undefined){
-                return reply(Boom.forbidden("invalid verificaiton link"));
-            }
-            
-            User.findByCredentials(decoded.username, decoded.password, function(err, user){
-
-                if (err) {
-                    return reply(Boom.badImplementation(err));
-                }
-      
-                if (user === null) {
-                    console.log("user not found");
-                    return reply(Boom.forbidden("invalid verification link"));
-                }
-
-                if (user.isVerified === true) {
-                    return reply(Boom.forbidden("account is already verified"));
+    auth: {
+        mode: 'try',
+        strategy: 'jwt'
+    },
+    pre: [{
+        assign: 'user',
+        method: (request, reply)=> {
+            var emailToken = request.params.token;
+            var key = Config.get('/jwtSecret');
+                        
+            jwt.verify(emailToken, key, function(err, decoded){
+                if(decoded === undefined){
+                    return reply(err);
                 }
                 
-                const id = user._id;
-                
-                user.emailVerified = true;
-                       
-                User.findByIdAndUpdate(id, user, function(err, result){
+                User.findByCredentials(decoded.username, decoded.password, function(err, user){
+                    if(err){
+                        return reply(err);
+                    }
                     
-                    //console.log('result id: '+result._id);
-                    //console.log('result username:  '+result.username);
-                    //console.log('result email verified: '+result.emailVerified);
+                    if(user === null){
+                        return reply(Boom.forbidden("invalid verification link"));
+                    }
+                    
+                    user.emailVerified = true;
+                    
+                    User.findByIdAndUpdate(user._id, user, function(err, result){});
+
+                    reply(user);
                 });
-        
-                User.findByUsername(decoded.username, function(err, founduser){
-                    
-                    //console.log('user id: '+ founduser._id);
-                    //console.log('user name: '+ founduser.username);
-                    //console.log('user email: '+ founduser.email);
-                    //console.log('email Verified: '+ founduser.emailVerified);
-            
-                })
-
-            })
-    
-        });
+            });
+        }
+    }, {
+        assign: 'token',
+        method: (request, reply) => {
+            const Token = request.server.plugins.token;
+            Token.create(request.pre.user, (err, token) => {
+                if (err) { return reply(err); }
+                return reply(token);
+            });
+        }
+    }],
+    handler: (request, reply) => {
+        reply({ token: request.pre.token });
     }
-}
+};    

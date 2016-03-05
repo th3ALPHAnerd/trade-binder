@@ -13,7 +13,7 @@
         verifyEmailService.pushToken = function (token) {
             return $http({
                 method: 'GET',
-                url: "http://localhost:8000/api/accounts/verifyEmail/" + token + "",
+                url: "/api/accounts/verifyEmail/" + token + "",
                 skipAuthorization: true
             });
         };

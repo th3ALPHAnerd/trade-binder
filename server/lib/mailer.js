@@ -2,6 +2,7 @@
 
 const mailgun = require('mailgun').Mailgun;
 const privateInfo = require('../config/private');
+const Config = require('../config/config');
 //const Hoek = require('hoek');
 
 
@@ -11,6 +12,7 @@ exports.sendEmailVerificationLink = function(user, token){
     //console.log('email: ' + user.email);
      //console.log('token: ' + token);
     //console.log('id: '+ user.id);    
+    //console.log('baseUrl: '+ Config.get('/baseUrl'));
     var mg = new mailgun(privateInfo.mailgunKey);
     mg.sendRaw('noReply@mtgTradeBinder.com', 
                 user.email,
@@ -19,7 +21,7 @@ exports.sendEmailVerificationLink = function(user, token){
                 '\nContent-Type: text/html; charset=utf-8' +
                 '\nSubject: MTG Trade Binder Registration' +
                 '\n\n<p>Thank you ' + user.username + ' for registering with mtgTradeBinder</p>' +
-                '<p><a href="http://localhost:8000/#/tradeBinder/verifyEmail/'+token+'">Verification link</a></p>',
+                '<p><a href="'+Config.get('/baseUrl')+'/#/tradeBinder/verifyEmail/'+token+'">Verification link</a></p>',
                 function(err) {
                     if (err){
                         console.log('Oh noes: ' + err);

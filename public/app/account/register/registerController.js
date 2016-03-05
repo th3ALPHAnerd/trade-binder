@@ -25,6 +25,8 @@
         }
       });
       reset();
+      
+      $state.go('checkEmail');
     }
 
     function reset() {
