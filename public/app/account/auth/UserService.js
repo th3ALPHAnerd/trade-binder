@@ -38,7 +38,6 @@
 
     function handleSuccess(response) {
       store.set('jwt', response.data.token);
-
       return { success: true,  data: response.data };
     }
 

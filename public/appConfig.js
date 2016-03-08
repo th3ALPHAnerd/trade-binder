@@ -6,8 +6,8 @@
         'app.appController'
     ])
 
-            .config(['jwtInterceptorProvider', '$httpProvider', '$stateProvider',
-                function (jwtInterceptorProvider, $httpProvider, $stateProvider) {
+            .config(['jwtInterceptorProvider', '$httpProvider', 
+                function (jwtInterceptorProvider, $httpProvider) {
 
                     jwtInterceptorProvider.tokenGetter = ['store', function (store) {
                             return store.get('jwt');
@@ -15,10 +15,6 @@
 
                     $httpProvider.interceptors.push('jwtInterceptor');
 
-                    $stateProvider
-                            .state('logout', {
-                                controller: 'appController'
-                            });
                 }]);
 
 })();
