@@ -2,7 +2,6 @@
         
 const Joi = require('joi');
 const Async = require('async');
-//const privateInfo = require('./private');
 const jwt = require('jsonwebtoken');
 const mailer = require('../lib/mailer.js');
 const Config = require('../config/config');
@@ -35,11 +34,12 @@ exports.login = {
                 if (err) { return reply(err); }
                 if (!user) {
                     const response = 'Invalid username and/or password.';
+                    //console.log('not a valid username and/or password');
                     return reply(response).takeover().code(409);
                 }
-                //console.log('user is verified: ' + user.emailVerified);
+                console.log('user is verified: ' + user.emailVerified);
                 if (!user.emailVerified){
-                    const response = 'Your email has not been verified';
+                    const response = 'Your email has not been verified';    
                     return reply(response).takeover().code(409);
                 }
 
@@ -132,10 +132,6 @@ exports.register = {
                             return reply(Boom.forbidden(err));
                         }
                         
-                        //for(var prop in user){
-                            //console.log("User prop: " +prop);
-                        //}
-                        //console.log('userId: '+ user.id);
                     });
                     
                 },
@@ -248,4 +244,5 @@ exports.verifyEmail = {
     handler: (request, reply) => {
         reply({ token: request.pre.token });
     }
+
 };    

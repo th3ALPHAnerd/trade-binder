@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('account.register', ['account.register.RegisterController'])
+  angular.module('account.register', [
+      'account.register.RegisterController'
+  ])
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
     .state('register', {
@@ -16,5 +18,5 @@
       templateUrl: 'app/account/register/checkEmail.html'
     });
   }]);
+  
 })();
-

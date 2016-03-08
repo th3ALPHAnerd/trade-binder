@@ -12,9 +12,15 @@
         vm.loggedIn = UserService.isLoggedIn();
 
         function verifyEmail() {
-            verifyEmailService.pushToken(vm.token);
-
+            
+            verifyEmailService.pushToken(vm.token).then(login, console.log('Error verifying email'));
+            
+        }
+        
+        function login(){
             var user = jwtHelper.decodeToken(vm.token);
+
+            vm.dataLoading = true;
 
             var data = {
                 username: user.username,
@@ -26,12 +32,16 @@
                     $state.go('home');
                 } else {
                     alert(response.message);
+                    vm.dataLoading = false;
                 }
             });
-
         }
+        
+        
 
         vm.verifyEmailSubmit = verifyEmail;
+            
+            
     }
 
 })();

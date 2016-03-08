@@ -12,34 +12,17 @@ const User = BaseModel.extend({
   constructor: function(attrs) {
     ObjectAssign(this, attrs);
 
-    Object.defineProperty(this, '_roles', {
+    Object.defineProperty(this, '_scope', {
       writable: true,
       enumerable: false
     });
   },
-  hydrateRoles: function(callback) {
-    if (!this.roles) {
-      this._roles = {};
-      return callback(null, this._roles);
+  hydrateScopes: function() {
+    this._scope = [];
+    if (this.account) { this._scope.push('account'); }
+
+    return this._scope;
     }
-    if (this._roles) { return callback(null, this._roles); }
-
-    const self = this;
-    const tasks = {};
-
-    if (this.roles.account) {
-      tasks.account = function (done) {
-        Account.findById(self.roles.account.id, done);
-      };
-    }
-
-    Async.auto(tasks, (err, results) => {
-      if (err) { return callback(err); }
-
-      self._roles = results;
-      callback(null, self._roles);
-    });
-  }
 });
 
 
@@ -51,11 +34,9 @@ User.schema = Joi.object().keys({
   username: Joi.string().token().lowercase().required(),
   email: Joi.string().email().lowercase().required(),
   password: Joi.string(),
-  roles: Joi.object().keys({
-    account: Joi.object().keys({
-      id: Joi.string().required(),
-      name: Joi.string().required()
-    })
+  account: Joi.object().keys({
+    id: Joi.string().required(),
+    name: Joi.string().required()
   }),
   emailVerified: Joi.boolean(),
   timeCreated: Joi.date()
@@ -139,10 +120,10 @@ User.findByCredentials = function (username, password, callback) {
 };
 
 
-//User.findById = function(id, callback){
-//    const query = {id: id};
-//    this.findOne(query, callback);
-//}
+User.findById = function(id, callback){
+    const query = {id: id};
+    this.findOne(query, callback);
+}
 
 
 User.findByUsername = function (username, callback) {
