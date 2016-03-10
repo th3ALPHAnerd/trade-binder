@@ -1,7 +1,9 @@
 (function () {
   'use strict';
 
-  angular.module('account.verifyEmail', ['account.verifyEmail.verifyEmailController'])
+  angular.module('account.verifyEmail', [
+      'account.verifyEmail.verifyEmailController'
+  ])
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
     .state('verifyEmail', {

@@ -36,11 +36,8 @@
                 }
             });
         }
-        
-        
 
         vm.verifyEmailSubmit = verifyEmail;
-            
             
     }
 
