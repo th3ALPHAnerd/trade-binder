@@ -38,6 +38,7 @@ User.schema = Joi.object().keys({
     id: Joi.string().required(),
     name: Joi.string().required()
   }),
+  emailVerified: Joi.boolean(),
   timeCreated: Joi.date()
 });
 
@@ -77,6 +78,7 @@ User.create = function (username, password, email, callback) {
         username: username.toLowerCase(),
         email: email.toLowerCase(),
         password: results.passwordHash.hash,
+        emailVerified: false,
         timeCreated: new Date()
       };
 
@@ -98,8 +100,8 @@ User.findByCredentials = function (username, password, callback) {
     user: (done) => {
       const query = {};
 
-      if (username.indexOf('@') > -1) { query.email = username.toLowerCase(); }
-      else { query.username = username.toLowerCase(); }
+      if (username.indexOf('@') > -1) { query.email = username; }
+      else { query.username = username; }
 
       self.findOne(query, done);
     },
@@ -118,8 +120,14 @@ User.findByCredentials = function (username, password, callback) {
 };
 
 
+User.findById = function(id, callback){
+    const query = {id: id};
+    this.findOne(query, callback);
+}
+
+
 User.findByUsername = function (username, callback) {
-  const query = { username: username.toLowerCase() };
+  const query = { username: username };
   this.findOne(query, callback);
 };
 

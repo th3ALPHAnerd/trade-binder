@@ -37,6 +37,7 @@
     "inert": "^3.2.0",
     "joi": "^8.0.1",
     "jsonwebtoken": "^5.7.0",
+    "mailgun": "^0.5.0",
     "mongodb": "^2.1.7",
     "node-uuid": "^1.4.7",
     "object-assign": "^4.0.1",
