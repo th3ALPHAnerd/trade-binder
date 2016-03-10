@@ -10,7 +10,8 @@ var bower = require('gulp-bower');
 var watch = require('gulp-watch');
 var uncss = require('gulp-uncss');
 var csslint = require('gulp-csslint');
-var checkCSS = require('gulp-check-unused-css');
+var cssmin = require('gulp-cssmin');
+var runSequence = require('run-sequence');
 
 
 gulp.task('csslint', function () {
@@ -19,37 +20,21 @@ gulp.task('csslint', function () {
             .pipe(csslint.reporter());
 });
 
-gulp.task('unUsedCss', function () {
+gulp.task('css', function () {
     gulp.src([
         'public/assets/libs/bootstrap/dist/css/bootstrap.css',
-        'public/assets/libs/bootstrap/dist/css/bootstrap-theme.css'        
-    ], [
-        'public/*.html',
-        'public/app/**.*html',
-        'public/app/**/**.*html'
-    ]).pipe(checkCSS({
-        ignore:['.nav', '.navbar']
-    }))
-            .pipe(gulp.dest('public/dist'));
-});
-
-gulp.task('unCSS', function () {
-    gulp.src([
-        'public/assets/libs/bootstrap/dist/css/bootstrap.css',
+        'public/assets/css/app.css',
         'public/assets/libs/bootstrap/dist/css/bootstrap-theme.css'
     ])
             .pipe(uncss({
                 ignore: [
-           // 'nav', 
-           // 'navbar',
-           // '*active',
-           // 'dropdown*',
-            '.fade', 
-            '.fade.in', 
-            '.collapse', 
-            'collapse.in', 
-            '.collapsing', 
-            /\.open/],
+                    '.active',
+                    '.fade',
+                    '.fade.in',
+                    '.collapse',
+                    'collapse.in',
+                    '.collapsing',
+                    /\.open/],
                 html: [
                     'public/*.html',
                     'public/app/**.*html',
@@ -57,11 +42,12 @@ gulp.task('unCSS', function () {
                     '!public/assets/libs/**.*html'
                 ]
             }))
+            .pipe(concat('single.css'))
+            .pipe(cssmin())
+            .pipe(rename('app.min.css'))
             .pipe(gulp.dest('public/dist'));
 
 });
-
-
 
 gulp.task('watchScripts', function () {
     gulp.watch([
@@ -72,8 +58,8 @@ gulp.task('watchScripts', function () {
     ], ['scripts']);
 });
 
-gulp.task('bower', function () {
-    return bower();
+gulp.task('bower', function (cb) {
+    return bower(cb);
 });
 
 //Clean js in dist folder
@@ -81,6 +67,15 @@ gulp.task('cleanJs', function (cb) {
     return del([
         'public/dist/**.js',
         'public/dist/**.map',
+        '!public/dist'
+
+    ], cb);
+});
+
+//Clean js in dist folder
+gulp.task('cleanCss', function (cb) {
+    return del([
+        'public/dist/**.css',
         '!public/dist'
 
     ], cb);
@@ -134,4 +129,11 @@ gulp.task('scripts', function () {
 });
 
 //Default Task
-gulp.task('default', ['lint', 'scripts', 'test']);
+gulp.task('default', ['lint', 'scripts', 'css', 'test']);
+
+gulp.task('build', function(cb){
+    runSequence('bower',
+    'clean:dist',
+    ['scripts', 'css'],
+    cb);
+});
