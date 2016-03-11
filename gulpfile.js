@@ -21,7 +21,7 @@ gulp.task('csslint', function () {
 });
 
 //Gets the fonts from Font-Awesome and puts them in the dist folder
-gulp.task('fontAwesome', function () {
+gulp.task('fontAwesome', ['clean:fonts'], function () {
     return gulp.src([
         'public/assets/libs/font-awesome/fonts/FontAwesome.otf',
         'public/assets/libs/font-awesome/fonts/fontawesome-webfont.eot',
@@ -33,7 +33,7 @@ gulp.task('fontAwesome', function () {
             .pipe(rename({
                 dirname: '/fonts'
             }))
-            .pipe(gulp.dest('public/dist'));
+            .pipe(gulp.dest('public'));
 });
 
 //removes unsed css, concats and minifies the used css files and places it in the dist folder
@@ -111,13 +111,17 @@ gulp.task('cleanCss', function (cb) {
     return del([
         'public/dist/**.css',
         '!public/dist'
-
     ], cb);
 });
 
 //Clean dist folder
 gulp.task('clean:dist', function (cb) {
     return del(['public/dist/**', '!public/dist'], cb);
+});
+
+//Clean fonts folder
+gulp.task('clean:fonts', function (cb){
+    return del(['public/fonts/**'], cb);
 });
 
 /**

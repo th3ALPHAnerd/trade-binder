@@ -19,3 +19,7 @@ npm-debug.log
 **/config/private
 /server/config/private.js
 .server/config/private.js
+/public/fonts/**
+/public/fonts/
+./public/fonts/**
+./public/fonts/
