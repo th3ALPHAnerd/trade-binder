@@ -13,18 +13,36 @@ var csslint = require('gulp-csslint');
 var cssmin = require('gulp-cssmin');
 var runSequence = require('run-sequence');
 
-
+//css lint
 gulp.task('csslint', function () {
     gulp.src('public/app/assets/libs/bootstrap/dist/css/*.css')
             .pipe(csslint())
             .pipe(csslint.reporter());
 });
 
-gulp.task('css', function () {
+//Gets the fonts from Font-Awesome and puts them in the dist folder
+gulp.task('fontAwesome', function () {
+    return gulp.src([
+        'public/assets/libs/font-awesome/fonts/FontAwesome.otf',
+        'public/assets/libs/font-awesome/fonts/fontawesome-webfont.eot',
+        'public/assets/libs/font-awesome/fonts/fontawesome-webfont',
+        'public/assets/libs/font-awesome/fonts/fontawesome-webfont.ttf',
+        'public/assets/libs/font-awesome/fonts/fontawesome-webfont.woff',
+        'public/assets/libs/font-awesome/fonts/fontawesome-webfont.woff2'
+    ])
+            .pipe(rename({
+                dirname: '/fonts'
+            }))
+            .pipe(gulp.dest('public/dist'));
+});
+
+//removes unsed css, concats and minifies the used css files and places it in the dist folder
+gulp.task('css', ['fontAwesome'], function () {
     gulp.src([
         'public/assets/libs/bootstrap/dist/css/bootstrap.css',
         'public/assets/css/app.css',
-        'public/assets/libs/bootstrap/dist/css/bootstrap-theme.css'
+        'public/assets/libs/bootstrap/dist/css/bootstrap-theme.css',
+        'public/assets/libs/font-awesome/css/font-awesome.css'
     ])
             .pipe(uncss({
                 ignore: [
@@ -34,6 +52,7 @@ gulp.task('css', function () {
                     '.collapse',
                     'collapse.in',
                     '.collapsing',
+                    '.popover',
                     /\.open/],
                 html: [
                     'public/*.html',
@@ -49,6 +68,20 @@ gulp.task('css', function () {
 
 });
 
+//looks for changes in js and css files and rebuilds the items in the dist folder
+gulp.task('watch', function(){
+    gulp.watch([
+        'public/app/**/*.js',
+        'public/app.js',
+        'public/appController.js',
+        'public/appConfig.js',
+        'public/assets/css/*.css'
+    ],[
+        'scripts', 
+        'css']);
+});
+
+//watchs for change in js files and rebuilds app.min.js
 gulp.task('watchScripts', function () {
     gulp.watch([
         'public/app/**/*.js',
@@ -58,6 +91,7 @@ gulp.task('watchScripts', function () {
     ], ['scripts']);
 });
 
+//same as bower install
 gulp.task('bower', function (cb) {
     return bower(cb);
 });
@@ -81,7 +115,6 @@ gulp.task('cleanCss', function (cb) {
     ], cb);
 });
 
-
 //Clean dist folder
 gulp.task('clean:dist', function (cb) {
     return del(['public/dist/**', '!public/dist'], cb);
@@ -97,7 +130,7 @@ gulp.task('test', function (cb) {
     }, cb).start();
 });
 
-// Lint Task
+//Js lint
 gulp.task('lint', function () {
     return gulp.src([
         'public/app/**/*.js',
@@ -129,11 +162,12 @@ gulp.task('scripts', function () {
 });
 
 //Default Task
-gulp.task('default', ['lint', 'scripts', 'css', 'test']);
+gulp.task('default', ['lint', 'csslint', 'scripts', 'css', 'test']);
 
-gulp.task('build', function(cb){
+//get/generates all the front end needs
+gulp.task('build', function (cb) {
     runSequence('bower',
-    'clean:dist',
-    ['scripts', 'css'],
-    cb);
+            'clean:dist',
+            ['scripts', 'css'],
+            cb);
 });
