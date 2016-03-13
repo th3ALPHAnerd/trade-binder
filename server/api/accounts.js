@@ -34,7 +34,6 @@ exports.login = {
                 if (err) { return reply(err); }
                 if (!user) {
                     const response = 'Invalid username and/or password.';
-                    //console.log('not a valid username and/or password');
                     return reply(response).takeover().code(409);
                 }
                 console.log('user is verified: ' + user.emailVerified);
@@ -184,10 +183,7 @@ exports.register = {
 
                     mailer.sendEmailVerificationLink(user, jwtToken);
                     
-                }]//,
-                //token: ['linkUser', 'linkAccount', (done, results) => {
-                //    Token.create(results.linkAccount, done);
-                //}]
+                }]
             }, (err, results) => {
                 if (err) { return reply(err); }
 

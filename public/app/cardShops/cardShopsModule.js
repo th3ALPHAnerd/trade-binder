@@ -2,7 +2,7 @@
     'use strict';
 
     angular.module('cardShops', [])
-            .config(['$stateProvider', '$locationProvider', function ($stateProvider, $locationProvider) {
+            .config(['$stateProvider', function ($stateProvider) {
                     $stateProvider
                             .state('cardShops', {
                                 url: '/tradeBinder/cardShops',
