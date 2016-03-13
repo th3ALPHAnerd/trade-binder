@@ -24,10 +24,11 @@
           $state.go('home');
         } else {
           alert(response.message);
-          vm.dataLoading = false;
         }
       });
       reset();
+      
+      $state.go('checkEmail');
     }
 
     function reset() {

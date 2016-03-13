@@ -14,6 +14,7 @@ You need [Node.js](http://nodejs.org/download/) and
 ```bash
 $ git clone git@github.com:dghalbr/tradeBinder.git && cd ./tradeBinder
 $ npm install
+$ gulp build
 ```
 
 ### Setup

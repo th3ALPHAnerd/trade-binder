@@ -4,8 +4,10 @@
   angular.module('account', [
       'account.accountController', 
       'account.register', 
-      'account.login'
+      'account.login', 
+      'account.verifyEmail'
   ])
+
   .config(['$stateProvider', function ($stateProvider) {
     $stateProvider
     .state('account', {

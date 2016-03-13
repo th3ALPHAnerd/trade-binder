@@ -15,7 +15,7 @@ const create = function (user, callback) {
   };
   const options = {
     issuer: 'trade-binder',
-    expiresIn: '24h'
+    expiresIn: "24h"
   };
 
   return callback(null, Jwt.sign(payload, Config.get('/jwtSecret'), options));

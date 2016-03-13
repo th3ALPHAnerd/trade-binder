@@ -1,4 +1,4 @@
-(function () {
+(function() {
   'use strict';
 
   angular.module('app.appConfig', ['app.appController'])
@@ -7,7 +7,7 @@
 
   function config(jwtInterceptorProvider, $httpProvider, $stateProvider) {
 
-    jwtInterceptorProvider.tokenGetter = ['$http', 'jwtHelper', 'store', function ($http, jwtHelper, store) {
+    jwtInterceptorProvider.tokenGetter = ['$http', 'jwtHelper', 'store', function($http, jwtHelper, store) {
       var accessToken = store.get('access-token');
       var refreshToken = store.get('refresh-token');
 
@@ -28,11 +28,8 @@
 
     $httpProvider.interceptors.push('jwtInterceptor');
     $stateProvider
-    .state('logout', {
-      controller: 'appController'
-    });
+      .state('logout', {
+        controller: 'appController'
+      });
   }
-
 })();
-
-

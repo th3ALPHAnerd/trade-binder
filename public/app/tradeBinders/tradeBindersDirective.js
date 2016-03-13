@@ -10,10 +10,10 @@
             link: function (scope, el, attrs) {
                 scope.name = attrs.name;
                 $(el).popover({
-                    trigger: 'hover',
+                    trigger: 'click',
                     html: true,
                     content: '<img src=' + attrs.cardImage + '>',
-                    placement: "bottom"
+                    placement: "top"
                 });
             }
         };

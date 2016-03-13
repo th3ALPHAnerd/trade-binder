@@ -12,6 +12,10 @@
       controller: 'RegisterController',
       controllerAs: 'register',
       resolve: []
+    })
+    .state('checkEmail', {
+      url: '/tradeBinder/checkEmail',
+      templateUrl: 'app/account/register/checkEmail.html'
     });
   }]);
   
